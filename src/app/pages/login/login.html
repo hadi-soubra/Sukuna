@@ -1,0 +1,6 @@
+@switch (dropStatus.status()) {
+  @case ('Teaser') { <app-teaser /> }
+  @case ('Upcoming') { <app-upcoming /> }
+  @case ('Live') { <app-live /> }
+  @case ('Ended') { <app-ended /> }
+}
