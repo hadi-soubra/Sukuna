@@ -74,6 +74,7 @@ export class AuthService {
 
     isAuthenticated(): boolean {
         // i need to intrepret the token and sent it to the auth/check api to check if the token is valid and not expired based on the responce statuse 200 then valid or 401 notvlaid i contcare abput the responce just the responce state 
+        return !!this.getToken();
     }
 
     logout(): void {

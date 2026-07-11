@@ -1,17 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { DropStatus } from '../../core/services/drop-status';
+import { DropStatus } from '../../shared/services/drop-status';
 import { Teaser } from './teaser/teaser';
 import { Upcoming } from './upcoming/upcoming';
 import { Live } from './live/live';
 import { Ended } from './ended/ended';
 
 @Component({
-  selector: 'app-landing',
+  selector: 'app-login',
   imports: [Teaser, Upcoming, Live, Ended],
-  templateUrl: './landing.html',
-  styleUrl: './landing.scss',
+  templateUrl: './login.html',
+  styleUrl: './login.scss',
 })
-export class Landing {
+export class Login {
   protected readonly dropStatus = inject(DropStatus);
 }
 
