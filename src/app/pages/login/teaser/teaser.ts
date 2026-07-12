@@ -5,7 +5,7 @@ import { DOCUMENT } from '@angular/common';
   selector: 'app-teaser',
   imports: [],
   templateUrl: './teaser.html',
-  styleUrl: './teaser.scss',
+  styleUrls: ['./teaser.scss','../login.scss']
 })
 export class Teaser {
   private readonly document = inject(DOCUMENT);
