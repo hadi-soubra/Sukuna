@@ -65,11 +65,16 @@
               "buildTarget": "Sukuna:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+
+          "options": {
+            "allowedHosts": ["captionless-terri-nonverbal.ngrok-free.dev"]
+          }
         },
         "test": {
           "builder": "@angular/build:unit-test"
         }
+        
       }
     }
   }

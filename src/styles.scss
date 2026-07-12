@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+
+    //colors
+    --color-bg: #0b0a0b;
+    --color-text: #ECE8E1;
+    --color-gold: #C29C25;
+    --color-red: #C8362A;
+    --color-muted: #646463;
+
+    //fonts
+    --font-terminal: 'JetBrains Mono';
+    --font-jp: 'Noto Sans JP';
+    --font-main: 'Shippori Mincho';
+    --font-sub: 'Zen Kaku Gothic New';
+
+    //font sizes
+    --text-xs: clamp(11px, 2.5vw, 10px);
+    --text-sm: clamp(13px, 3vw, 14px);
+    --text-md: clamp(15px, 3.5vw, 20px);
+    --text-lg: clamp(24px, 5vw, 32px);
+    --text-xl: clamp(32px, 12vw, 100px);
+}
+
+body {
+    min-height: 100vh;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sub);
+}
+
+.no-scroll {
+  overflow: hidden;
+}
