@@ -1,0 +1,24 @@
+:host * {
+    margin: 0;
+}
+
+h1 {
+  font-family: var(--font-main);
+  font-weight: 500;
+  font-size: var(--text-xl);
+  line-height: 1.25;
+}
+
+.typed {
+  border-right: 10px solid var(--color-red);
+}
+
+.typed.blink {
+  animation: blink 0.75s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
