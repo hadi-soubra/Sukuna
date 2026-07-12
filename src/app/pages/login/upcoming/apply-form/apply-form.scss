@@ -20,14 +20,17 @@
   font-weight: bold;
 }
 
+@media (max-width: 600px) {
+  .eyebrow {
+    margin-top: 5rem;
+  }
+}
+
 h1 {
   font-family: var(--font-main);
   font-weight: 500;
   font-size: var(--text-xl);
   line-height: 1.25;
-  width: 17ch;
-  text-align: left;
-  white-space: nowrap;
 }
 
 .typed {
@@ -63,6 +66,12 @@ form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+}
+
+@media (max-width: 600px) {
+  .credentials {
+    grid-template-columns: 1fr;
+  }
 }
 
 label {
@@ -184,4 +193,10 @@ button[type="submit"] {
 button[type="submit"]:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  button[type="submit"] {
+    margin-bottom: 5rem;
+  }
 }

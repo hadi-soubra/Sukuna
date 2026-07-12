@@ -11,6 +11,13 @@ import { Confirmation } from './confirmation/confirmation';
 })
 export class Upcoming {
   protected readonly step = signal<StepType>('intro');
+  protected readonly applicantName = signal('');
+
+  protected onSubmitted(name: string): void {
+    this.applicantName.set(name);
+    this.step.set('confirmation');
+  }
+
 }
 
 type StepType = 'intro' | 'apply' | 'confirmation';

@@ -1,1 +1,32 @@
-<p>confirmation works!</p>
+<p class="eyebrow">
+    <span style="color: var(--color-red);">$ </span>
+    <span style="color: var(--color-gold);">./sukuna --resquest </span>
+    <span style="color: var(--color-muted);">// #4830-QUEUED
+</span>
+</p>
+
+<h1><span class="typed" [class.blink]="typingDone()">{{ headline() }}</span></h1>
+<p class="subtitle">申請を受理しました</p>
+
+<p class="description">We review requests by hand, not by algorithm. If your vibe fits the room, you'll hear from us by Email, not before. No status updates, no follow-ups.</p>
+
+<div class="detail">
+
+    <p>
+        <span class="detail-title">[Applicant]......</span>
+        <span class="detail-info gold"> {{ applicantName() }}</span>
+    </p>
+        <p>
+        <span class="detail-title">[Status]......</span>
+        <span class="detail-info gold"> Pending_Review</span>
+    </p>
+        <p>
+        <span class="detail-title">[Reviewed_By]......</span>
+        <span class="detail-info gold"> Sukuna LLC</span>
+    </p>
+        <p>
+        <span class="detail-title">[Login]......</span>
+        <span class="detail-info gold"> Locked Until Approved</span>
+    </p>
+
+</div>

@@ -1,0 +1,51 @@
+:host * {
+    margin: 0;
+}
+
+h1 {
+  font-family: var(--font-main);
+  font-weight: 500;
+  font-size: var(--text-xl);
+  line-height: 1.25;
+}
+
+.typed {
+  border-right: 10px solid var(--color-red);
+}
+
+.typed.blink {
+  animation: blink 0.75s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--color-gold);
+  padding: 20px 24px;
+  font-family: var(--font-terminal);
+}
+
+.detail p {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.detail-title {
+  color: var(--color-muted);
+}
+
+.detail-info {
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.detail-info.gold {
+  color: var(--color-gold);
+}

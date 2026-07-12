@@ -13,18 +13,24 @@ export class ApplyForm {
   private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
 
-  private readonly fullHeadline = 'Not everyone gets in.';
+  private readonly fullHeadline = 'Not everyone gets in';
   protected readonly headline = signal('');
   protected readonly typingDone = signal(false);
 
   private readonly fb = inject(FormBuilder);
 
-  readonly submitted = output<void>();
-  constructor() {
-      this.document.body.classList.add('no-scroll');
-      this.destroyRef.onDestroy(() => {
-      this.document.body.classList.remove('no-scroll');
-    });
+  readonly submitted = output<string>();
+
+constructor() {
+  if (window.innerWidth > 600) {
+    this.document.documentElement.classList.add('no-scroll');
+    this.document.body.classList.add('no-scroll');
+  }
+
+  this.destroyRef.onDestroy(() => {
+    this.document.documentElement.classList.remove('no-scroll');
+    this.document.body.classList.remove('no-scroll');
+  });
     let charCount = 0;
     const typingId = setInterval(() => {
       charCount++;
@@ -53,6 +59,8 @@ export class ApplyForm {
       return;
     }
     console.log(this.applyForm.value);
-    this.submitted.emit();
+    this.submitted.emit(this.applyForm.value.fullName ?? '');
   }
+
+  
 }

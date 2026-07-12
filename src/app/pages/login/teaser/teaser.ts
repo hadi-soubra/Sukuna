@@ -16,11 +16,13 @@ export class Teaser {
 
   protected readonly typingDone = signal(false);
 
-  constructor() {
-    this.document.body.classList.add('no-scroll');
-    this.destroyRef.onDestroy(() => {
+constructor() {
+  this.document.documentElement.classList.add('no-scroll');
+  this.document.body.classList.add('no-scroll');
+  this.destroyRef.onDestroy(() => {
+    this.document.documentElement.classList.remove('no-scroll');
     this.document.body.classList.remove('no-scroll');
-    });
+  });
 
     let charCount = 0;
     const typingId = setInterval(() => {
