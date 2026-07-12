@@ -1,5 +1,5 @@
 @switch (step()) {
   @case ('intro') { <app-intro (apply)="step.set('apply')" /> }
-  @case ('apply') { <app-apply-form /> }
+  @case ('apply') { <app-apply-form (submitted)="step.set('confirmation')" /> }
   @case ('confirmation') { <app-confirmation /> }
 }

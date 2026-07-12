@@ -1,1 +1,50 @@
-<p>apply-form works!</p>
+<p class="eyebrow">
+    <span style="color: var(--color-red);">$ </span>
+    <span style="color: var(--color-gold);">./sukuna --request-invite </span>
+    <span style="color: var(--color-muted);">// send application for review</span>
+</p>
+
+<h1><span class="typed" [class.blink]="typingDone()">{{ headline() }}</span></h1>
+
+<p class="subtitle">誰もが入れるわけではありません。</p>
+
+<form [formGroup]="applyForm" (ngSubmit)="onSubmit()">
+    <p class="section-label">[ 01 ] create your credentials</p>
+    <section class="credentials">
+        <label>
+        Full name
+        <input type="text" formControlName="fullName" placeholder="your name" />
+        </label>
+        <label>
+        Email
+        <input type="email" formControlName="email" placeholder="you@domain.com" />
+        </label>
+        <label>
+        Password
+        <input type="password" formControlName="password" placeholder="##################" />
+        </label>
+        <label>
+        Confirm password
+        <input type="password" formControlName="confirmPassword" placeholder="##################"/>
+        </label>
+    </section>
+
+    <p class="disclaimer">
+        <span>[NOTE] </span>
+        <span>creating credentials doesn't grant access. Your email and password only activate once an application is approved.</span>
+    </p>
+
+    <p class="section-label">[ 02 ] show us your 'vibe'</p>
+    <section class="uploads">
+        <div class="drop-zone">Drop an image</div>
+        <div class="drop-zone">Drop an image</div>
+        <div class="drop-zone">Drop an image</div>
+    </section>
+
+    <label class="checkbox-label">
+        <input type="checkbox" formControlName="agree" />
+        I understand this is a request for access, not a purchase. Not all applicants are accepted, and there's no appeal process.
+    </label>
+
+    <button type="submit" [disabled]="applyForm.invalid">[ Complete Application ]</button>
+</form>
