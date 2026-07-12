@@ -8,7 +8,7 @@
 
 <p class="subtitle">新作がリリースされました</p>
 
-<p class="description">The drop has opened. Log in to shop before it's gone</p>
+<p class="description">The drop has opened. If you have been accepted, log in to shop before it's gone</p>
 
 <div class="countdown">
   <div class="countdown-item">
@@ -24,8 +24,9 @@
     <p class="countdown-label">MINUTES</p>
   </div>
   <div class="countdown-item">
-    <p class="countdown-number">0</p>
+    <p class="countdown-number">{{countdown()}}</p>
     <p class="countdown-label">SECONDS</p>
   </div>
 </div>
 
+<button type="button" class="login-button" (click)="onGOTOLOGIN()">[GO To LOG IN]</button>

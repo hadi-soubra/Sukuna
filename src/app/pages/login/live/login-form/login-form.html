@@ -1,1 +1,27 @@
-<p>login-form works!</p>
+<p class="eyebrow">
+    <span style="color: var(--color-red);">$ </span>
+    <span style="color: var(--color-gold);">./sukuna --request-invite </span>
+    <span style="color: var(--color-muted);">// send application for review</span>
+</p>
+
+<h1><span class="typed" [class.blink]="typingDone()">{{ headline() }}</span></h1>
+
+<p class="subtitle">すべてがなくなる前に、急いで</p>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <section class="credentials">
+
+        <label>
+        Email
+        <input type="email" formControlName="email" placeholder="you@domain.com" />
+        </label>
+
+        <label>
+        Password
+        <input type="password" formControlName="password" placeholder="##################" />
+        </label>
+
+    </section>
+
+   <button type="submit" [disabled]="loginForm.invalid">[ LOG IN ]</button>
+</form>

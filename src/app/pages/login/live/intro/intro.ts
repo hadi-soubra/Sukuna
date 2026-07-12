@@ -16,6 +16,10 @@ export class Intro {
     protected readonly headline = signal('');
     protected readonly typingDone = signal(false);
 
+    protected readonly countdown = signal(1);
+
+    readonly gotologin = output<void>();
+
       constructor() {
     this.document.body.classList.add('no-scroll');
     this.destroyRef.onDestroy(() => {
@@ -35,5 +39,13 @@ export class Intro {
     }, 80);
     this.destroyRef.onDestroy(() => clearInterval(typingId));
 
+    const countdownId = setInterval(() => {
+      this.countdown.set(0);
+    }, 1000);
+    this.destroyRef.onDestroy(() => clearInterval(countdownId));
+  }
+  protected onGOTOLOGIN(): void {
+    this.gotologin.emit();
   }
 }
+

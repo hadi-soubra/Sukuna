@@ -1,4 +1,4 @@
 @switch (step()) {
-  @case ('intro') { <app-intro> </app-intro>  }
-  @case ('login') { <app-login-form></app-login-form> }
+  @case ('intro') { <app-intro (gotologin)="step.set('login')" />  }
+  @case ('login') { <app-login-form (login)="onLogin()"/> }
 }
