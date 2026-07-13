@@ -1,5 +1,4 @@
 import { Component, DestroyRef, inject, signal,computed, output } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 
 
 @Component({
@@ -9,7 +8,6 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./intro.scss', '../../login.scss'],
 })
 export class Intro {
-    private readonly document = inject(DOCUMENT);
     private readonly destroyRef = inject(DestroyRef);
   
     private readonly fullHeadline = 'New Drop Is Live';
@@ -21,10 +19,6 @@ export class Intro {
     readonly gotologin = output<void>();
 
       constructor() {
-    this.document.body.classList.add('no-scroll');
-    this.destroyRef.onDestroy(() => {
-    this.document.body.classList.remove('no-scroll');
-    });
 
     let charCount = 0;
     const typingId = setInterval(() => {

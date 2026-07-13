@@ -1,6 +1,4 @@
 import { Component, inject,signal,DestroyRef, input } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-
 
 @Component({
   selector: 'app-confirmation',
@@ -10,7 +8,6 @@ import { DOCUMENT } from '@angular/common';
 })
 export class Confirmation {
   
-  private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
 
   private readonly fullHeadline = 'Application received';
@@ -18,10 +15,6 @@ export class Confirmation {
   protected readonly typingDone = signal(false);
   
   constructor() {
-      this.document.body.classList.add('no-scroll');
-      this.destroyRef.onDestroy(() => {
-      this.document.body.classList.remove('no-scroll');
-    });
     let charCount = 0;
     const typingId = setInterval(() => {
       charCount++;

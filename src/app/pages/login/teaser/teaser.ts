@@ -1,5 +1,4 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-teaser',
@@ -8,7 +7,6 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./teaser.scss','../login.scss']
 })
 export class Teaser {
-  private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
 
   private readonly fullHeadline = 'The Next Drop';
@@ -17,12 +15,6 @@ export class Teaser {
   protected readonly typingDone = signal(false);
 
 constructor() {
-  this.document.documentElement.classList.add('no-scroll');
-  this.document.body.classList.add('no-scroll');
-  this.destroyRef.onDestroy(() => {
-    this.document.documentElement.classList.remove('no-scroll');
-    this.document.body.classList.remove('no-scroll');
-  });
 
     let charCount = 0;
     const typingId = setInterval(() => {

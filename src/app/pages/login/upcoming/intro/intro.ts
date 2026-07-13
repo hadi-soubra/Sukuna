@@ -1,5 +1,4 @@
 import { Component, DestroyRef, inject, signal,computed, output } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { DropStatus } from '../../../../shared/services/drop-status';
 
 
@@ -11,7 +10,6 @@ import { DropStatus } from '../../../../shared/services/drop-status';
 })
 export class Intro {
 
-  private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
   private readonly dropStatus = inject(DropStatus);
 
@@ -29,10 +27,6 @@ export class Intro {
 
 
   constructor() {
-    this.document.body.classList.add('no-scroll');
-    this.destroyRef.onDestroy(() => {
-    this.document.body.classList.remove('no-scroll');
-    });
 
     let charCount = 0;
     const typingId = setInterval(() => {

@@ -1,5 +1,4 @@
 import { Component,DestroyRef, inject, signal, output } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -10,7 +9,6 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class ApplyForm {
 
-  private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
 
   private readonly fullHeadline = 'Not everyone gets in';
@@ -22,15 +20,6 @@ export class ApplyForm {
   readonly submitted = output<string>();
 
 constructor() {
-  if (window.innerWidth > 600) {
-    this.document.documentElement.classList.add('no-scroll');
-    this.document.body.classList.add('no-scroll');
-  }
-
-  this.destroyRef.onDestroy(() => {
-    this.document.documentElement.classList.remove('no-scroll');
-    this.document.body.classList.remove('no-scroll');
-  });
     let charCount = 0;
     const typingId = setInterval(() => {
       charCount++;
