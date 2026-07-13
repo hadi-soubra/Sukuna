@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 100dvh;
   max-width: 100vw;
   text-align: center;
 }
@@ -18,12 +18,6 @@
   letter-spacing: 0.05em;
   margin-bottom: 1rem;
   font-weight: bold;
-}
-
-@media (max-width: 600px) {
-  .eyebrow {
-    margin-top: 5rem;
-  }
 }
 
 h1 {
@@ -58,9 +52,10 @@ h1 {
 }
 
 form {
-  width: 50%;
+  width: 80%;
   text-align: left;
 }
+
 
 .credentials{
     display: flex;
@@ -106,16 +101,10 @@ button[type="submit"] {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
-  margin-top: 5rem;
+  margin-top: 4rem;
 }
 
 button[type="submit"]:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-@media (max-width: 600px) {
-  button[type="submit"] {
-    margin-bottom: 5rem;
-  }
 }
