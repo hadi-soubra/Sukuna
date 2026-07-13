@@ -1,5 +1,6 @@
 import { Component,DestroyRef, inject, signal, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Meta } from '@angular/platform-browser'; 
 
 @Component({
   selector: 'app-login-form',
@@ -18,7 +19,23 @@ export class LoginForm {
 
   readonly login = output<void>();
 
+  private readonly meta = inject(Meta);              
+
   constructor() {
+
+  this.meta.updateTag({
+    name: 'viewport',
+    content: 'width=device-width, initial-scale=1, maximum-scale=1',
+  });
+
+  this.destroyRef.onDestroy(() => {
+    this.meta.updateTag({
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1',
+    });
+  });
+    
+
     let charCount = 0;
     const typingId = setInterval(() => {
       charCount++;
