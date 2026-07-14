@@ -1,0 +1,41 @@
+# docker compose -f docker-compose.students.yml up
+services:
+  academy-api:
+    image: aliyaakoubinmind/academy-api:latest
+    container_name: academy-api
+    restart: always
+    environment:
+      PORT: 4000
+      DATABASE_URL: "postgresql://root:example@db:5432/academy"
+      JWT_SECRET_KEY: "academy-dev-secret-change-if-you-want"
+    ports:
+      - "4000:4000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: academy
+    volumes:
+      - db-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d academy"]
+      interval: 2s
+      timeout: 5s
+      retries: 10
+
+  # Optional web UI to inspect the database at http://localhost:8080
+  # (System: PostgreSQL, Server: db, User: root, Password: example, Database: academy)
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+
+volumes:
+  db-data:

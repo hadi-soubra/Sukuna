@@ -17,7 +17,7 @@ export class LoginForm {
 
   private readonly fb = inject(FormBuilder);
 
-  readonly login = output<void>();
+  readonly login = output<{ email: string; password: string }>();
 
   private readonly meta = inject(Meta);              
 
@@ -56,10 +56,13 @@ export class LoginForm {
     password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
-  protected onSubmit(): void {
+  protected onLogin(): void {
     if (this.loginForm.invalid) {
       return;
     }
-    this.login.emit()
+    this.login.emit({
+      email: this.loginForm.value.email ?? '',
+      password: this.loginForm.value.password ?? '',
+    });
   }
 }

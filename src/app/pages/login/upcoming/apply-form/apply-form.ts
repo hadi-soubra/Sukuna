@@ -1,6 +1,12 @@
 import { Component,DestroyRef, inject, signal, output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Meta } from '@angular/platform-browser'; 
+
+function passwordMatch(group: AbstractControl) { 
+  const password = group.get('password')?.value;
+  const confirmPassword = group.get('confirmPassword')?.value;
+  return password===confirmPassword ? null : { passwordMismatch: true };
+}
 
 @Component({
   selector: 'app-apply-form',
@@ -8,6 +14,7 @@ import { Meta } from '@angular/platform-browser';
   templateUrl: './apply-form.html',
   styleUrl: './apply-form.scss',
 })
+
 export class ApplyForm {
 
   private readonly destroyRef = inject(DestroyRef);
@@ -18,9 +25,10 @@ export class ApplyForm {
 
   private readonly fb = inject(FormBuilder);
 
-  readonly submitted = output<string>();
+  readonly submitted = output<{ firstName: string; lastName: string; email: string; password: string; dateOfBirth: string }>();
 
-  private readonly meta = inject(Meta);              
+  private readonly meta = inject(Meta);     
+           
 constructor() {
   this.meta.updateTag({
     name: 'viewport',
@@ -50,20 +58,26 @@ constructor() {
   }
 
   protected readonly applyForm = this.fb.group({
-    fullName: ['', Validators.required],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
+    dateOfBirth: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(8)]],
     confirmPassword: ['', Validators.required],
     agree: [false, Validators.requiredTrue],
-  });
+  }, { validators: passwordMatch });
 
   protected onSubmit(): void {
     if (this.applyForm.invalid) {
       return;
     }
     console.log(this.applyForm.value);
-    this.submitted.emit(this.applyForm.value.fullName ?? '');
+    this.submitted.emit({
+      firstName: this.applyForm.value.firstName ?? '',
+      lastName: this.applyForm.value.lastName ?? '',
+      email: this.applyForm.value.email ?? '',
+      dateOfBirth: this.applyForm.value.dateOfBirth ?? '',
+      password: this.applyForm.value.password ?? '',
+    });
   }
-
-  
 }

@@ -12,21 +12,35 @@
     <p class="section-label">[ 01 ] create your credentials</p>
     <section class="credentials">
         <label>
-        Full name
-        <input type="text" formControlName="fullName" placeholder="your name" />
+        First name
+        <input type="text" formControlName="firstName" placeholder="your first name" />
         </label>
+
+        <label>
+        Last name
+        <input type="text" formControlName="lastName" placeholder="your last name" />
+        </label>
+
         <label>
         Email
         <input type="email" formControlName="email" placeholder="you@domain.com" />
         </label>
+
+        <label>
+        Date of birth
+        <input type="date" formControlName="dateOfBirth"/>
+        </label>
+
         <label>
         Password
         <input type="password" formControlName="password" placeholder="##################" />
         </label>
+
         <label>
         Confirm password
         <input type="password" formControlName="confirmPassword" placeholder="##################"/>
         </label>
+        
     </section>
 
     <p class="disclaimer">

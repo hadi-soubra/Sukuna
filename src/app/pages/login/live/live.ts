@@ -2,6 +2,7 @@ import { Component, signal, inject } from '@angular/core';
 import { Intro } from './intro/intro';
 import { LoginForm } from './login-form/login-form';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../core/auth/auth.service'
 
 @Component({
   selector: 'app-live',
@@ -15,9 +16,17 @@ export class Live {
 
   private readonly router = inject(Router);
 
+  private readonly auth = inject(AuthService);
 
-  protected onLogin(): void{
-    this.router.navigate(['/home']);
+  protected onLogin(payload: { email: string; password: string }): void {
+    this.auth.authenticate(payload.email, payload.password).subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('login failed', err);
+      },
+    });
   }
 
 }

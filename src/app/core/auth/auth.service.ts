@@ -18,7 +18,7 @@ export class AuthService {
         private http: HttpClient,
         private cookieService: CookieService,
     ) {}
-    baseURL = 'https://melaine-palaeobiologic-savourily.ngrok-free.dev/api/';
+    baseURL = 'http://localhost:4000/api/';
     tokenkey = 'token';
     currentUser :  IUser | undefined;
 
@@ -32,18 +32,18 @@ export class AuthService {
 
 
     //add error handling
-    register(payload: { email: string; password: string; firstName: string; lastName: string; username: string; dateOfBirth: string; role: string }): Observable<string | undefined> {
+    register(payload: { firstName: string; lastName: string; email: string; password: string; dateOfBirth: string }) {
+        const body = { firstName: payload.firstName , lastName: payload.lastName , email: payload.email, password: payload.password, dateOfBirth: payload.dateOfBirth, username: payload.email, role: 'user' };
         return this.http
         .post<{token: string; user: IUser}>(
             `${this.baseURL}auth/register`,
-            payload
+            body
         )
         .pipe(
             tap((response) => {
                 if(!response.token) return;
                 this.currentUser = response.user;
                 this.setToken(response.token);
-                this.router.navigate(['/']);
             }),
             map((response) => response.token)
         )
@@ -57,8 +57,8 @@ export class AuthService {
         .post<{token: string; user: IUser}>(
             `${this.baseURL}auth/login`,
             {   
-                Username : email, 
-                Password : password,
+                email : email, 
+                password : password,
             }
         )
         .pipe(
@@ -66,7 +66,6 @@ export class AuthService {
                 if(!response.token) return;
                 this.currentUser = response.user;
                 this.setToken(response.token);
-                this.router.navigate(['/']);
             }),
             map((response) => response.token)
         )
