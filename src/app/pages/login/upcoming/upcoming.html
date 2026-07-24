@@ -1,5 +1,5 @@
 @switch (step()) {
   @case ('intro') { <app-intro (apply)="step.set('apply')" /> }
-  @case ('apply') { <app-apply-form (submitted)="onSubmitted($event)" /> }
+  @case ('apply') { <app-apply-form (submitted)="onSubmitted($event)" [errorMessage]="errorMessage()" [loading]="loading()" (clearServerError)="errorMessage.set(null)" /> }
   @case ('confirmation') { <app-confirmation [applicantName]="applicantName()" /> }
 }

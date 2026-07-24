@@ -23,7 +23,7 @@
 
         <label>
         Email
-        <input type="email" formControlName="email" placeholder="you@domain.com" />
+        <input type="email" formControlName="email" placeholder="you@domain.com" (input)="clearServerError.emit()" />
         </label>
 
         <label>
@@ -40,7 +40,7 @@
         Confirm password
         <input type="password" formControlName="confirmPassword" placeholder="##################"/>
         </label>
-        
+
     </section>
 
     <p class="disclaimer">
@@ -60,5 +60,17 @@
         I understand this is a request for access, not a purchase. Not all applicants are accepted, and there's no appeal process.
     </label>
 
-    <button type="submit" [disabled]="applyForm.invalid">[ Complete Application ]</button>
+    @if (showPasswordError()) {
+      <p class="form-error">Password must be at least 6 characters.</p>
+    }
+    @if (applyForm.errors?.['passwordMismatch'] && applyForm.get('confirmPassword')?.touched) {
+      <p class="form-error">Passwords do not match.</p>
+    }
+    @if (errorMessage()) {
+      <p class="form-error">{{ errorMessage() }}</p>
+    }
+
+    <button type="submit" [disabled]="applyForm.invalid || loading()">
+      {{ loading() ? '[ Submitting... ]' : '[ Complete Application ]' }}
+    </button>
 </form>

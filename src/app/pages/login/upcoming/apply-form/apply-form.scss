@@ -16,7 +16,8 @@
   font-family: var(--font-terminal);
   font-size: var(--text-md);
   letter-spacing: 0.05em;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
+  margin-top: 5rem;
   font-weight: bold;
 }
 
@@ -53,7 +54,7 @@ h1 {
   font-size: var(--text-md);
   color: var(--color-gold);
   letter-spacing: 0.3em;
-  margin-bottom: 1rem;
+  margin-bottom: 5rem;
   font-weight: bold;
 }
 
@@ -186,6 +187,7 @@ button[type="submit"] {
   border-radius: 4px;
   padding: 16px;
   letter-spacing: 0.1em;
+  margin-bottom: 5rem;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -195,8 +197,15 @@ button[type="submit"]:disabled {
   cursor: not-allowed;
 }
 
-@media (max-width: 600px) {
-  button[type="submit"] {
-    margin-bottom: 5rem;
-  }
+.form-error {
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+  font-weight: bold;
+  color: var(--color-red);
+  letter-spacing: 0.05em;
+  margin: 1rem;
+}
+
+.form-error::before {
+  content: "[!] ";
 }

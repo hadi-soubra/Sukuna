@@ -1,4 +1,4 @@
 @switch (step()) {
   @case ('intro') { <app-intro (gotologin)="step.set('login')" />  }
-  @case ('login') { <app-login-form (login)="onLogin($event)"/> }
+  @case ('login') { <app-login-form (login)="onLogin($event)" [errorMessage]="errorMessage()" [loading]="loading()" (clearError)="errorMessage.set(null)"/> }
 }

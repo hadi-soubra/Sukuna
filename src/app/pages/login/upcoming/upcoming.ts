@@ -1,4 +1,5 @@
 import { Component, signal,inject } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Intro } from './intro/intro';
 import { ApplyForm } from './apply-form/apply-form';
 import { Confirmation } from './confirmation/confirmation';
@@ -16,15 +17,25 @@ export class Upcoming {
 
   private readonly auth = inject(AuthService);
 
+  protected readonly errorMessage = signal<string | null>(null);
+  protected readonly loading = signal(false);
+
 protected onSubmitted(payload: { firstName: string; lastName: string; email: string; password: string; dateOfBirth: string }): void {
+  this.errorMessage.set(null);
+  this.loading.set(true);
   this.auth.register(payload).subscribe({
     next: () => {
+      this.loading.set(false);
       this.applicantName.set(payload.firstName);
       this.step.set('confirmation');
     },
-    error: (err) => {
-      console.error('registration failed', err);
-      // we'll show a real message later
+    error: (err: HttpErrorResponse) => {
+      this.loading.set(false);
+      this.errorMessage.set(
+        err.status === 409
+          ? 'That email is already registered.'
+          : 'Something went wrong. Please try again.'
+      );
     },
   });
 }
