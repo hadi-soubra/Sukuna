@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
 import { map, Observable } from 'rxjs';
-import { email } from '@angular/forms/signals';
 import { IUser } from './IUser';
 import { tap } from 'rxjs/operators';
 
@@ -79,6 +78,6 @@ export class AuthService {
     logout(): void {
         this.cookieService.delete(this.tokenkey, '/');
         this.currentUser = undefined;
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
     }
 }

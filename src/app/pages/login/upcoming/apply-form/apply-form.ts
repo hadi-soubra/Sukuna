@@ -1,6 +1,8 @@
-import { Component,DestroyRef, inject, signal, output } from '@angular/core';
+import { Component,DestroyRef, inject, signal, output, input } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { debounceTime } from 'rxjs';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Meta } from '@angular/platform-browser'; 
+import { Meta } from '@angular/platform-browser';
 
 function passwordMatch(group: AbstractControl) { 
   const password = group.get('password')?.value;
@@ -22,10 +24,16 @@ export class ApplyForm {
   private readonly fullHeadline = 'Not everyone gets in';
   protected readonly headline = signal('');
   protected readonly typingDone = signal(false);
+  protected readonly showPasswordError = signal(false);
 
   private readonly fb = inject(FormBuilder);
 
   readonly submitted = output<{ firstName: string; lastName: string; email: string; password: string; dateOfBirth: string }>();
+
+  readonly errorMessage = input<string | null>(null);
+  readonly loading = input(false);
+
+  readonly clearServerError = output<void>();
 
   private readonly meta = inject(Meta);     
            
@@ -55,6 +63,14 @@ constructor() {
     }, 80);
     this.destroyRef.onDestroy(() => clearInterval(typingId));
 
+    const passwordControl = this.applyForm.get('password');
+    passwordControl?.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.showPasswordError.set(false));
+    passwordControl?.valueChanges
+      .pipe(debounceTime(600), takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.showPasswordError.set(passwordControl.hasError('minlength')));
+
   }
 
   protected readonly applyForm = this.fb.group({
@@ -62,7 +78,7 @@ constructor() {
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     dateOfBirth: ['', Validators.required],
-    password: ['', [Validators.required, Validators.minLength(8)]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', Validators.required],
     agree: [false, Validators.requiredTrue],
   }, { validators: passwordMatch });

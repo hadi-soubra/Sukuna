@@ -108,3 +108,16 @@ button[type="submit"]:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.form-error {
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+  font-weight: bold;
+  color: var(--color-red);
+  letter-spacing: 0.05em;
+  margin-top: 2rem;
+}
+
+.form-error::before {
+  content: "[!] ";
+}

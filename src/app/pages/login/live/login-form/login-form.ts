@@ -1,4 +1,4 @@
-import { Component,DestroyRef, inject, signal, output } from '@angular/core';
+import { Component,DestroyRef, inject, signal, output, input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Meta } from '@angular/platform-browser'; 
 
@@ -18,6 +18,11 @@ export class LoginForm {
   private readonly fb = inject(FormBuilder);
 
   readonly login = output<{ email: string; password: string }>();
+
+  readonly errorMessage = input<string | null>(null);
+  readonly loading = input(false);
+
+  readonly clearError = output<void>();
 
   private readonly meta = inject(Meta);              
 
