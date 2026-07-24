@@ -5,14 +5,6 @@ Working spec for the full front-end ecommerce build. Products come from the
 jewelery, men's clothing, women's clothing). Auth runs against the local dockerized
 academy-api. Checkout is **simulated** (front-end only — no real orders/payments).
 
-Legend: `[ ]` todo · `[~]` partial · `[x]` done
-
-Reference mockups (save the screenshots here so this file renders them):
-- `docs/mockups/home.png` — storefront home
-- `docs/mockups/product.png` — product detail
-
-![Home storefront](docs/mockups/home.png)
-![Product detail](docs/mockups/product.png)
 
 ---
 
@@ -42,8 +34,8 @@ Single route; `@switch (dropStatus.status())` renders one of these. Already buil
 - [x] **Upcoming → Registration** — apply-form (FormBuilder, validators, password match)
 - [x] **Live → Login** — login-form
 - [x] **Ended** — drop-closed state
-- [ ] **Error messages** on invalid register (409 = email taken) / login (401 = bad creds) + loading state
-- [ ] After successful login, land on the storefront `/shop`
+- [x] **Error messages** on invalid register (409 = email taken) / login (401 = bad creds) + loading state
+- [x] After successful login, land on the storefront `/shop`
 
 ---
 

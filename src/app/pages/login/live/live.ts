@@ -28,7 +28,7 @@ export class Live {
     this.auth.authenticate(payload.email, payload.password).subscribe({
       next: () => {
         this.loading.set(false);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/shop']);
       },
       error: (err: HttpErrorResponse) => {
         this.loading.set(false);

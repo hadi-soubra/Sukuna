@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import {Login} from './pages/login/login';
-import {Home} from './pages/home/home';
+import {Shop} from './pages/shop/shop';
 import { AdminLogin } from './pages/admin/admin-login/admin-login';
 import { AdminPage } from './pages/admin/admin-page/admin-page';
 
@@ -12,8 +12,8 @@ export const routes: Routes = [
         component: Login
     },
     {
-        path: 'home',
-        component: Home
+        path: 'shop',
+        component: Shop
     },
     {
         path: 'admin-login',
