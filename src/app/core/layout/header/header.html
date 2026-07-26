@@ -13,6 +13,6 @@
 
     <a class="tok" routerLink="/account" aria-label="Account">[<span class="label">account</span>]</a>
 
-    <a class="tok" routerLink="/cart" aria-label="Cart">[<span class="label">cart</span>@if (cart.count() > 0) {<span class="count">&nbsp;{{ cart.count() }}</span>}]</a>
+    <button type="button" class="tok" aria-label="Cart" (click)="cart.openCart()">[<span class="label">cart</span>@if (cart.count() > 0) {<span class="count">&nbsp;{{ cart.count() }}</span>}]</button>
   </div>
 </header>

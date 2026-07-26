@@ -18,7 +18,7 @@ These are the foundation. Nothing below moves until these exist.
 - [x] **Shop header / nav** (`core/layout/header`) — hamburger (emits `menu`), centered `sukuna 店` logo → /shop, search icon (emits `search`), account → /account, cart → /cart w/ live red count badge (CartStore). Inline SVGs, gold bottom border, sticky top.
 - [x] **Product card** (`shared/components/product-card`) — `product` input; paper tile w/ blended image, uppercased category tag, 2-line title, price (currency), ★ rating, `[ ADD TO CART ]` → CartStore.add. Links to /product/:id. Rendering in a grid on the Shop page.
 - [x] **Terminal status-bar footer** (`core/layout/status-bar`) — red mode box (`mode` input, default SUDO), live route path `~/sukuna/...`, live clock, optional `info` slot, yellow `cart:N` box wired to CartStore. Fixed to viewport bottom.
-- [ ] **Collapsible cart drawer (mini-cart)** — the right sidebar in the home mockup; slides in/out; line items w/ qty +/− and remove, subtotal, shipping, total, CHECKOUT button
+- [x] **Collapsible cart drawer (mini-cart)** (`shared/components/cart-drawer`) — slides in from right; opened by header `[cart]`, closed by overlay / `[esc]` / Escape key; line items w/ qty ± and remove; subtotal, shipping (free >$100), total; CHECKOUT (placeholder). Empty state. Reads CartStore `isOpen` + computeds.
 - [ ] **Route guards** — protect authed pages; redirect to gate if not logged in
 - [ ] **HTTP interceptor** — attach token to academy-api requests; handle 401 globally
 - [ ] **Cross-cutting states** — every data view needs loading + empty + error states

@@ -2,6 +2,15 @@
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  padding: 10px;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, border-color 0.2s ease;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+// gold border + 3D tilt (transform applied inline from the mouse position) on hover
+.card:hover {
+  border-color: var(--color-gold);
 }
 
 // red textured backdrop behind each product
@@ -18,6 +27,11 @@
   object-fit: contain;
   padding: 12%;
   box-sizing: border-box;
+  transition: transform 0.3s ease;
+}
+// enlarge the product image a bit on hover
+.card:hover .media img {
+  transform: scale(1.08);
 }
 
 // category label, top-left of the image
@@ -46,9 +60,12 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 2.6em; // 2 lines × 1.3 line-height
+  transition: color 0.2s ease;
 }
-.title:hover {
+// whole-card hover: title turns gold + bold
+.card:hover .title {
   color: var(--color-gold);
+  font-weight: bold;
 }
 
 .meta {
@@ -58,27 +75,10 @@
   font-family: var(--font-terminal);
 }
 .price {
-  font-size: var(--text-sm);
+  font-size: var(--text-md);
   color: var(--color-text);
 }
 .rating {
   font-size: var(--text-xs);
   color: var(--color-gold);
-}
-
-// same style as the login/apply submit buttons
-
-.add {
-  font-family: var(--font-terminal);
-  font-size: var(--text-sm);
-  font-weight: bold;
-  color: var(--color-black);
-  background: var(--color-red);
-  border: none;
-  padding: 16px 40px;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-}
-.add:hover {
-  opacity: 0.9;
 }

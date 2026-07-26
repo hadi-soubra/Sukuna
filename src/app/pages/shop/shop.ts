@@ -4,6 +4,7 @@ import { forkJoin, map, switchMap } from 'rxjs';
 import { Header } from '../../core/layout/header/header';
 import { StatusBar } from '../../core/layout/status-bar/status-bar';
 import { ProductCard } from '../../shared/components/product-card/product-card';
+import { CartDrawer } from '../../shared/components/cart-drawer/cart-drawer';
 import { ProductService } from '../../shared/services/product.service';
 import { IProduct } from '../../shared/interfaces/IProduct';
 
@@ -14,7 +15,7 @@ interface CategorySection {
 
 @Component({
   selector: 'app-shop',
-  imports: [Header, StatusBar, ProductCard, UpperCasePipe],
+  imports: [Header, StatusBar, ProductCard, CartDrawer, UpperCasePipe],
   templateUrl: './shop.html',
   styleUrl: './shop.scss',
 })
