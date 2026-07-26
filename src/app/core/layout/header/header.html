@@ -1,0 +1,18 @@
+<header class="header">
+  <div class="side left">
+    <button type="button" class="tok" aria-label="Menu" (click)="menu.emit()">[<span class="label">menu</span>]</button>
+  </div>
+
+  <a class="logo" routerLink="/shop">
+    <span class="name">SUKUNA</span>
+    <img class="jp" src="favicon.png" alt="店" />
+  </a>
+
+  <div class="side right">
+    <button type="button" class="tok" aria-label="Search" (click)="search.emit()">[<span class="label">search</span>]</button>
+
+    <a class="tok" routerLink="/account" aria-label="Account">[<span class="label">account</span>]</a>
+
+    <a class="tok" routerLink="/cart" aria-label="Cart">[<span class="label">cart</span>@if (cart.count() > 0) {<span class="count">&nbsp;{{ cart.count() }}</span>}]</a>
+  </div>
+</header>

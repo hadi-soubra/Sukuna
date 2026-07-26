@@ -1,0 +1,75 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 20px;
+
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-gold);
+}
+
+// left / right groups flex-grow equally so the logo stays dead-center
+.side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.side.right {
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.logo {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  text-decoration: none;
+
+  font-family: var(--font-main);
+  font-size: var(--text-md);
+  letter-spacing: 0.2em;
+  color: var(--color-text);
+}
+.logo .name {
+  // cancel trailing letter-spacing so the gap to 店 stays even
+  margin-right: -0.2em;
+}
+.logo .jp {
+  height: 1.4em;
+  width: auto;
+  // vertically centered with the sukuna text
+  align-self: center;
+}
+
+// terminal-token nav items: [≡] [/] [@] [¥]dep
+.tok {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 6px;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-muted);
+  transition: color 0.15s ease;
+}
+.tok:hover {
+  color: var(--color-gold);
+}
+
+// inline cart count, e.g. [¥ cart 3]
+.count {
+  color: var(--color-red);
+}
