@@ -14,7 +14,7 @@ These are the foundation. Nothing below moves until these exist.
 
 - [x] **`Product` interface** — id, title, price, description, category, image, rating {rate, count}
 - [x] **`ProductService`** — treat Fake Store as a real DB: one live REST call per query, no bulk-cache. `getAll`, `getById`, `getCategories`, `getByCategory`. Returns Observables. (Price-sort/search aren't server-supported → done client-side on the returned list.)
-- [ ] **`CartService`** — signal of line items {product, qty}; computed count + total; add / updateQty / remove / clear; persist to `localStorage`
+- [x] **`CartStore`** (@ngrx/signals SignalStore) — `items` state; computed `count` + `total`; `add` / `updateQty` / `remove` / `clear`; persists to `localStorage` via an `effect`
 - [ ] **Shop header / nav** (top bar in both mockups) — logo, search icon, account icon, cart icon w/ count badge, hamburger/menu. Shown on every shop page
 - [ ] **Product card** — image, category tag, title, price, rating, ADD TO CART. Reused in home grid, listing pages, similar-items, admin
 - [ ] **Collapsible cart drawer (mini-cart)** — the right sidebar in the home mockup; slides in/out; line items w/ qty +/− and remove, subtotal, shipping, total, CHECKOUT button
