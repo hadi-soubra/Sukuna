@@ -12,11 +12,10 @@ academy-api. Checkout is **simulated** (front-end only — no real orders/paymen
 
 These are the foundation. Nothing below moves until these exist.
 
-- [ ] **`Product` interface** — id, title, price, description, category, image, rating {rate, count}
-- [ ] **`ProductService`** — fetch full catalog **once** into a signal; getById, categories. Filter/sort/search/similar all read this one cached signal (no refetching)
+- [x] **`Product` interface** — id, title, price, description, category, image, rating {rate, count}
+- [x] **`ProductService`** — treat Fake Store as a real DB: one live REST call per query, no bulk-cache. `getAll`, `getById`, `getCategories`, `getByCategory`. Returns Observables. (Price-sort/search aren't server-supported → done client-side on the returned list.)
 - [ ] **`CartService`** — signal of line items {product, qty}; computed count + total; add / updateQty / remove / clear; persist to `localStorage`
 - [ ] **Shop header / nav** (top bar in both mockups) — logo, search icon, account icon, cart icon w/ count badge, hamburger/menu. Shown on every shop page
-- [ ] **Terminal status-bar footer** (bottom bar: mode chip, current path `~/sukuna/shop`, `cart:N`) — your brand flourish, shared
 - [ ] **Product card** — image, category tag, title, price, rating, ADD TO CART. Reused in home grid, listing pages, similar-items, admin
 - [ ] **Collapsible cart drawer (mini-cart)** — the right sidebar in the home mockup; slides in/out; line items w/ qty +/− and remove, subtotal, shipping, total, CHECKOUT button
 - [ ] **Route guards** — protect authed pages; redirect to gate if not logged in
@@ -57,7 +56,7 @@ One page, param-driven (a category or "all"). This is where filter/sort/search l
 - [ ] **Sort** — price low→high, high→low, rating, name (your "price low-high" = sort)
 - [ ] **Filter** — price range; (category is already the route). Filter = narrow, Sort = order — build both, they're different
 - [ ] **Search** — query filters the grid live (also reachable from the header search icon) — *required by rubric*
-- [ ] All of sort/filter/search are **computed signals** over the one cached product list
+- [ ] Category filter = server call (`getByCategory`); price-sort + search = client-side over the returned list (Fake Store can't sort by price or search server-side)
 - [ ] **Empty state** — "no products match"
 
 ---
