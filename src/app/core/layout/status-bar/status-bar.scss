@@ -1,0 +1,55 @@
+.status-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 26px;
+  padding: 0;
+
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-gold);
+  font-family: var(--font-terminal);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  user-select: none;
+}
+
+// red box, left — the mode. Fills full height, flush to the left edge.
+.mode {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--color-red);
+  color: var(--color-black);
+  text-transform: uppercase;
+}
+
+.path {
+  color: var(--color-gold);
+}
+
+.info,
+.clock {
+  color: var(--color-muted);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+// yellow box, right — the cart count. Fills full height, flush to the right edge.
+.cart {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--color-gold);
+  color: var(--color-black);
+}
