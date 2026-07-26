@@ -1,0 +1,12 @@
+<article class="card" [style.transform]="tilt()" (mousemove)="onTilt($event)" (mouseleave)="resetTilt()">
+  <a class="media" [routerLink]="['/product', product().id]">
+    <img [src]="product().image" [alt]="product().title" />
+  </a>
+
+  <a class="title" [routerLink]="['/product', product().id]">{{ product().title }}</a>
+
+  <div class="meta">
+    <span class="price">{{ product().price | currency }}</span>
+    <span class="rating">★ {{ product().rating.rate }}</span>
+  </div>
+</article>

@@ -1,0 +1,84 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 10px;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, border-color 0.2s ease;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+// gold border + 3D tilt (transform applied inline from the mouse position) on hover
+.card:hover {
+  border-color: var(--color-gold);
+}
+
+// red textured backdrop behind each product
+.media {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  background: url('/prod_card_back.png') center / cover no-repeat, var(--color-bg);
+  overflow: hidden;
+}
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12%;
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
+}
+// enlarge the product image a bit on hover
+.card:hover .media img {
+  transform: scale(1.08);
+}
+
+// category label, top-left of the image
+.tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-family: var(--font-terminal);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+}
+
+.title {
+  font-family: var(--font-sub);
+  font-size: var(--text-sm);
+  line-height: 1.3;
+  color: var(--color-text);
+  text-decoration: none;
+
+  // always reserve 2 lines so price + button align across cards
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.6em; // 2 lines × 1.3 line-height
+  transition: color 0.2s ease;
+}
+// whole-card hover: title turns gold + bold
+.card:hover .title {
+  color: var(--color-gold);
+  font-weight: bold;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-terminal);
+}
+.price {
+  font-size: var(--text-md);
+  color: var(--color-text);
+}
+.rating {
+  font-size: var(--text-xs);
+  color: var(--color-gold);
+}

@@ -1,1 +1,51 @@
-<p>shop works!</p>
+<app-header />
+
+<main class="shop">
+
+    <section class="hero">
+    <p class="eyebrow">
+        <span style="color: var(--color-red);">$ </span>
+        <span style="color: var(--color-gold);">./sukuna --season 2026 </span>
+        <span style="color: var(--color-muted);">// modern staples</span>
+    </p>
+
+    <h1><span class="typed" [class.blink]="typingDone()">{{ headline() }}</span></h1>
+
+    <p class="subtitle">静かに生み出される、美しいものたち</p>
+
+    </section>
+
+  @if (newDrops().length) {
+    <section class="drops">
+      <div class="drops-head">
+        <h2 class="drops-title"><span class="slash">//</span> New Drops</h2>
+        <button type="button" class="view-all">[ view all ]</button>
+      </div>
+
+      <div class="grid">
+        @for (product of newDrops(); track product.id) {
+          <app-product-card [product]="product" />
+        }
+      </div>
+    </section>
+  }
+
+  @for (section of sections(); track section.category) {
+    <section class="drops">
+      <div class="drops-head">
+        <h2 class="drops-title"><span class="slash">//</span> {{ section.category | uppercase }}</h2>
+        <button type="button" class="view-all">[ view all ]</button>
+      </div>
+
+      <div class="grid">
+        @for (product of section.products; track product.id) {
+          <app-product-card [product]="product" />
+        }
+      </div>
+    </section>
+  }
+</main>
+
+<app-cart-drawer />
+
+<app-status-bar />
