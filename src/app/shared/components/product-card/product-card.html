@@ -1,0 +1,14 @@
+<article class="card">
+  <a class="media" [routerLink]="['/product', product().id]">
+    <img [src]="product().image" [alt]="product().title" />
+  </a>
+
+  <a class="title" [routerLink]="['/product', product().id]">{{ product().title }}</a>
+
+  <div class="meta">
+    <span class="price">{{ product().price | currency }}</span>
+    <span class="rating">★ {{ product().rating.rate }}</span>
+  </div>
+
+  <button type="button" class="add" (click)="addToCart()">[ ADD TO CART ]</button>
+</article>

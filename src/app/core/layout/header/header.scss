@@ -62,14 +62,19 @@
   font-family: var(--font-terminal);
   font-size: var(--text-sm);
   font-weight: 700;
+  color: var(--color-gold); // the [ ] brackets stay gold at all times
+}
+
+// the label text inside the brackets — muted, lights up on hover
+.tok .label {
   color: var(--color-muted);
   transition: color 0.15s ease;
 }
-.tok:hover {
+.tok:hover .label {
   color: var(--color-gold);
 }
 
-// inline cart count, e.g. [¥ cart 3]
+// inline cart count, e.g. [cart 3]
 .count {
   color: var(--color-red);
 }

@@ -16,7 +16,7 @@ These are the foundation. Nothing below moves until these exist.
 - [x] **`ProductService`** — treat Fake Store as a real DB: one live REST call per query, no bulk-cache. `getAll`, `getById`, `getCategories`, `getByCategory`. Returns Observables. (Price-sort/search aren't server-supported → done client-side on the returned list.)
 - [x] **`CartStore`** (@ngrx/signals SignalStore) — `items` state; computed `count` + `total`; `add` / `updateQty` / `remove` / `clear`; persists to `localStorage` via an `effect`
 - [x] **Shop header / nav** (`core/layout/header`) — hamburger (emits `menu`), centered `sukuna 店` logo → /shop, search icon (emits `search`), account → /account, cart → /cart w/ live red count badge (CartStore). Inline SVGs, gold bottom border, sticky top.
-- [ ] **Product card** — image, category tag, title, price, rating, ADD TO CART. Reused in home grid, listing pages, similar-items, admin
+- [x] **Product card** (`shared/components/product-card`) — `product` input; paper tile w/ blended image, uppercased category tag, 2-line title, price (currency), ★ rating, `[ ADD TO CART ]` → CartStore.add. Links to /product/:id. Rendering in a grid on the Shop page.
 - [x] **Terminal status-bar footer** (`core/layout/status-bar`) — red mode box (`mode` input, default SUDO), live route path `~/sukuna/...`, live clock, optional `info` slot, yellow `cart:N` box wired to CartStore. Fixed to viewport bottom.
 - [ ] **Collapsible cart drawer (mini-cart)** — the right sidebar in the home mockup; slides in/out; line items w/ qty +/− and remove, subtotal, shipping, total, CHECKOUT button
 - [ ] **Route guards** — protect authed pages; redirect to gate if not logged in
