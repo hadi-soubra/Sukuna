@@ -78,3 +78,10 @@
 .count {
   color: var(--color-red);
 }
+
+// account lives in the header on desktop, but moves into the sidebar on mobile
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none;
+  }
+}

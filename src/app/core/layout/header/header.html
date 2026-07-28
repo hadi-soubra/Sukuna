@@ -1,6 +1,6 @@
 <header class="header">
   <div class="side left">
-    <button type="button" class="tok" aria-label="Menu" (click)="menu.emit()">[<span class="label">menu</span>]</button>
+    <button type="button" class="tok" aria-label="Menu" (click)="ui.openMenu()">[<span class="label">menu</span>]</button>
   </div>
 
   <a class="logo" routerLink="/shop">
@@ -9,9 +9,7 @@
   </a>
 
   <div class="side right">
-    <button type="button" class="tok" aria-label="Search" (click)="search.emit()">[<span class="label">search</span>]</button>
-
-    <a class="tok" routerLink="/account" aria-label="Account">[<span class="label">account</span>]</a>
+    <a class="tok hide-mobile" routerLink="/account" aria-label="Account">[<span class="label">account</span>]</a>
 
     <button type="button" class="tok" aria-label="Cart" (click)="cart.openCart()">[<span class="label">cart</span>@if (cart.count() > 0) {<span class="count">&nbsp;{{ cart.count() }}</span>}]</button>
   </div>

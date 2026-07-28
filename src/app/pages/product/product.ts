@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Header } from '../../core/layout/header/header';
 import { StatusBar } from '../../core/layout/status-bar/status-bar';
 import { CartDrawer } from '../../shared/components/cart-drawer/cart-drawer';
+import { MenuSidebar } from '../../core/layout/menu-sidebar/menu-sidebar';
 import { ProductService } from '../../shared/services/product.service';
 import { CartStore } from '../../shared/services/cart.store';
 import { IProduct } from '../../shared/interfaces/IProduct';
@@ -16,6 +17,7 @@ import { IProduct } from '../../shared/interfaces/IProduct';
     Header,
     StatusBar,
     CartDrawer,
+    MenuSidebar,
     CurrencyPipe,
     UpperCasePipe,
   ],

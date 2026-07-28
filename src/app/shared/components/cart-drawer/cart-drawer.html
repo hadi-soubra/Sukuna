@@ -4,7 +4,7 @@
   <aside class="drawer">
     <header class="drawer-head">
       <h2 class="title">Cart <span class="count">[{{ cart.count() }}]</span></h2>
-      <button type="button" class="esc" (click)="cart.closeCart()">[esc]</button>
+      <button type="button" class="esc" (click)="cart.closeCart()">[<span class="lbl">esc</span>]</button>
     </header>
 
     @if (cart.items().length === 0) {

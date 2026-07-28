@@ -43,7 +43,7 @@ Single route; `@switch (dropStatus.status())` renders one of these. Already buil
 
 - [ ] **Hero** — eyebrow (`$ /sukuna --season 2026`), big headline, JP subtitle, blurb
 - [ ] **New Drops** — featured product grid (subset of catalog, e.g. one per category)
-- [ ] **Left sidebar** — search box + category list w/ counts (All, Electronics, Jewelry, Men, Women); clicking a category → listing page
+- [x] **Menu sidebar** (`core/layout/menu-sidebar`, slides from left, opened by header `[menu]`, `UiStore` state) — search input + category list w/ counts (All, Electronics, Jewelry, Men, Women); category → `/shop/:category` (listing route pending). Account shown here on mobile only.
 - [ ] **Collapsible cart** — the mini-cart drawer (shared component)
 - [ ] Header + status-bar footer (shared)
 

@@ -61,5 +61,11 @@ h1 {
   padding: 16px 40px;
   letter-spacing: 0.1em;
   cursor: pointer;
+  text-transform: uppercase;
+  transition: opacity 0.15s ease;
+}
+
+.login-button:hover{
+  opacity: 0.9;
 }
 

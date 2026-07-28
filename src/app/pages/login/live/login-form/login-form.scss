@@ -101,6 +101,8 @@ button[type="submit"] {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
+  text-transform: uppercase;
+  transition: opacity 0.15s ease;
   margin-top: 4rem;
 }
 
