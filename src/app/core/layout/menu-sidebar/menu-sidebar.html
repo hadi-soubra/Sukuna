@@ -2,8 +2,11 @@
   <div class="overlay" (click)="ui.closeMenu()"></div>
 
   <aside class="sidebar">
-    <header class="sidebar-head">
-      <img class="jp" src="favicon.png" alt="店" />
+    <header class="sidebar-head">  
+      <a class="logo" routerLink="/shop" (click)="ui.closeMenu()">
+        <span class="name" >SUKUNA</span>
+        <img class="jp" src="favicon.png" alt="店" />
+      </a>
       <button type="button" class="esc" (click)="ui.closeMenu()">[<span class="lbl">esc</span>]</button>
     </header>
 

@@ -43,6 +43,30 @@
   height: 20px;
   width: auto;
 }
+
+.logo {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  text-decoration: none;
+
+  font-family: var(--font-main);
+  font-size: var(--text-sm);
+  letter-spacing: 0.2em;
+  color: var(--color-text);
+}
+.logo .name {
+  // cancel trailing letter-spacing so the gap to 店 stays even
+  margin-right: -0.2em;
+}
+.logo .jp {
+  height: 1.4em;
+  width: auto;
+  // vertically centered with the sukuna text
+  align-self: center;
+}
+
 .esc {
   background: transparent;
   border: none;
