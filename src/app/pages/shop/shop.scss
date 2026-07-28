@@ -91,6 +91,7 @@ h1 {
   background: transparent;
   border: none;
   cursor: pointer;
+  text-decoration: none;
   font-family: var(--font-terminal);
   font-size: var(--text-sm);
   font-weight: bold;
@@ -114,6 +115,6 @@ h1 {
 }
 @media (max-width: 520px) {
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }

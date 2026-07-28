@@ -1,0 +1,65 @@
+<app-header />
+
+<main class="listing">
+  <div class="head">
+    <h1 class="cat-title">
+      <span class="slash">//</span> {{ categoryLabel() }}
+      <span class="count">[{{ visible().length }}]</span>
+    </h1>
+  </div>
+
+  @if (loading()) {
+    <p class="status">loading…</p>
+  } @else {
+    <div class="controls">
+      <div class="search">
+        <span class="prompt">$</span>
+        <input
+          type="text"
+          placeholder="search…"
+          [value]="searchQuery()"
+          (input)="onSearch($event)"
+        />
+      </div>
+
+      <div class="sort">
+        <span class="lbl">sort:</span>
+        @for (opt of sortOptions; track opt.key) {
+          <button
+            type="button"
+            class="sort-btn"
+            [class.active]="sortBy() === opt.key"
+            (click)="setSort(opt.key)"
+          >
+            {{ opt.label }}
+          </button>
+        }
+      </div>
+
+      <div class="filter">
+        <span class="lbl">max ${{ maxPrice() }}</span>
+        <input
+          type="range"
+          min="0"
+          [max]="priceCeiling()"
+          [value]="maxPrice()"
+          (input)="onMaxPrice($event)"
+        />
+      </div>
+    </div>
+
+    @if (visible().length) {
+      <div class="grid">
+        @for (product of visible(); track product.id) {
+          <app-product-card [product]="product" />
+        }
+      </div>
+    } @else {
+      <p class="status">no products match.</p>
+    }
+  }
+</main>
+
+<app-menu-sidebar />
+<app-cart-drawer />
+<app-status-bar mode="[VISUAL]" />

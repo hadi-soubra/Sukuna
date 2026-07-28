@@ -1,5 +1,6 @@
 import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { forkJoin, map, switchMap } from 'rxjs';
 import { Header } from '../../core/layout/header/header';
 import { StatusBar } from '../../core/layout/status-bar/status-bar';
@@ -16,7 +17,7 @@ interface CategorySection {
 
 @Component({
   selector: 'app-shop',
-  imports: [Header, StatusBar, ProductCard, CartDrawer, MenuSidebar, UpperCasePipe],
+  imports: [Header, StatusBar, ProductCard, CartDrawer, MenuSidebar, RouterLink, UpperCasePipe],
   templateUrl: './shop.html',
   styleUrl: './shop.scss',
 })

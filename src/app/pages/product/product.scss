@@ -94,7 +94,6 @@
 }
 .description {
   margin: 0 0 32px;
-  max-width: 48ch;
   font-family: var(--font-sub);
   font-size: var(--text-sm);
   line-height: 1.7;
@@ -149,6 +148,20 @@
 }
 .add:hover {
   opacity: 0.9;
+}
+
+// mobile: stack the add-to-cart button under the quantity selector
+@media (max-width: 800px) {
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 3rem;
+  }
+  // full-width stepper: − at the left, + at the right, number centered
+  .qty {
+    justify-content: space-between;
+    padding: 12px 20px;
+  }
 }
 
 .trust {

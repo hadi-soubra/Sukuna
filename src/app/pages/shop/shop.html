@@ -19,7 +19,7 @@
     <section class="drops">
       <div class="drops-head">
         <h2 class="drops-title"><span class="slash">//</span> New Drops</h2>
-        <button type="button" class="view-all">[ view all ]</button>
+        <a class="view-all" [routerLink]="['/shop', 'all']">[view all]</a>
       </div>
 
       <div class="grid">
@@ -34,7 +34,7 @@
     <section class="drops">
       <div class="drops-head">
         <h2 class="drops-title"><span class="slash">//</span> {{ section.category | uppercase }}</h2>
-        <button type="button" class="view-all">[ view all ]</button>
+        <a class="view-all" [routerLink]="['/shop', section.category]">[view all]</a>
       </div>
 
       <div class="grid">

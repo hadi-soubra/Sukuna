@@ -6,7 +6,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UiStore } from '../../../shared/services/ui.store';
 import { ProductService } from '../../../shared/services/product.service';
@@ -34,6 +34,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 export class MenuSidebar {
   protected readonly ui = inject(UiStore);
   private readonly productService = inject(ProductService);
+  private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
 
   protected readonly categories = signal<CategoryLink[]>([]);
@@ -46,7 +47,7 @@ export class MenuSidebar {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((products) => {
         const links: CategoryLink[] = [
-          { label: 'All', count: products.length, link: ['/shop'] },
+          { label: 'All', count: products.length, link: ['/shop', 'all'] },
         ];
         for (const [apiCat, label] of Object.entries(CATEGORY_LABELS)) {
           links.push({
@@ -69,6 +70,16 @@ export class MenuSidebar {
 
   protected onSearch(event: Event): void {
     this.search.set((event.target as HTMLInputElement).value);
+  }
+
+  // Enter in the search box → all-products listing with the query applied
+  protected submitSearch(): void {
+    const q = this.search().trim();
+    this.router.navigate(
+      ['/shop', 'all'],
+      q ? { queryParams: { search: q } } : {}
+    );
+    this.ui.closeMenu();
   }
 
   @HostListener('document:keydown.escape')
