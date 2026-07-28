@@ -57,10 +57,13 @@
   font-family: var(--font-terminal);
   font-size: var(--text-sm);
   font-weight: bold;
+  color: var(--color-gold); // brackets always gold
+}
+.esc .lbl {
   color: var(--color-muted);
   transition: color 0.15s ease;
 }
-.esc:hover {
+.esc:hover .lbl {
   color: var(--color-gold);
 }
 

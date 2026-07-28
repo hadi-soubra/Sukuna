@@ -1,0 +1,37 @@
+@if (ui.menuOpen()) {
+  <div class="overlay" (click)="ui.closeMenu()"></div>
+
+  <aside class="sidebar">
+    <header class="sidebar-head">
+      <img class="jp" src="favicon.png" alt="店" />
+      <button type="button" class="esc" (click)="ui.closeMenu()">[<span class="lbl">esc</span>]</button>
+    </header>
+
+    <div class="search">
+      <span class="prompt">$</span>
+      <input
+        type="text"
+        placeholder="search products"
+        [value]="search()"
+        (input)="onSearch($event)"
+      />
+    </div>
+
+    <p class="label">// categories</p>
+
+    <nav class="categories">
+      @for (cat of categories(); track cat.label) {
+        <a class="cat" [routerLink]="cat.link" (click)="ui.closeMenu()">
+          <span class="name">[ <span class="lbl">{{ cat.label }}</span> ]</span>
+          <span class="count">{{ cat.count }}</span>
+        </a>
+      }
+    </nav>
+
+    <!-- account: only shown here on mobile; lives in the header on desktop -->
+    <div class="account">
+      <p class="label">// account</p>
+      <a class="acc-link" routerLink="/account" (click)="ui.closeMenu()">[<span class="lbl">account</span>]</a>
+    </div>
+  </aside>
+}
