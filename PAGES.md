@@ -64,11 +64,11 @@ One page, param-driven (a category or "all"). This is where filter/sort/search l
 
 ## 4. Product detail `/product/:id`  `[ ]`  ← the product mockup
 
-- [ ] Large image, category tag, title, price, rating + review count, description
-- [ ] Quantity stepper + ADD TO CART
-- [ ] Trust line (free shipping / returns)
-- [ ] **Similar items** — same category, minus this product — *required by rubric, not in your mockup yet*
-- [ ] Reachable by clicking any product card anywhere
+- [x] Large image, category tag, title, price, rating + review count, description
+- [x] Quantity stepper + ADD TO CART (adds N to CartStore, opens mini-cart)
+- [x] Trust line (free shipping / returns)
+- [ ] **Similar items** — same category, minus this product — *required by rubric*; was built then REMOVED at user's request (2026-07-27) — add back before submission
+- [x] Reachable by clicking any product card anywhere (`/product/:id`)
 
 ---
 

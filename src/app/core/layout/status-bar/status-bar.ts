@@ -15,8 +15,6 @@ export class StatusBar {
   private readonly destroyRef = inject(DestroyRef);
   protected readonly cart = inject(CartStore);
 
-  // red box — vim-style mode; pages can override, e.g. 'NORMAL' / 'INSERT'
-  readonly mode = input('[SUDO]');
   protected readonly path = signal(this.toPath(this.router.url));
   protected readonly clock = signal(this.now());
 

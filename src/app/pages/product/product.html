@@ -1,0 +1,42 @@
+<app-header />
+
+<main class="product">
+
+  @if (loading()) {
+    <p class="status">loading…</p>
+  } @else if (product(); as p) {
+    <div class="detail">
+      <div class="media" [style.transform]="tilt()" (mousemove)="onTilt($event)" (mouseleave)="resetTilt()">
+        <img [src]="p.image" [alt]="p.title" />
+      </div>
+
+      <div class="info">
+        <p class="category">{{ p.category | uppercase }}</p>
+        <h1 class="title">{{ p.title }}</h1>
+
+        <div class="pricing">
+          <span class="price">{{ p.price | currency }}</span>
+          <span class="rating">★ {{ p.rating.rate }} · {{ p.rating.count }} reviews</span>
+        </div>
+
+        <p class="description">{{ p.description }}</p>
+
+        <div class="actions">
+          <div class="qty">
+            <button type="button" aria-label="decrease" (click)="dec()">−</button>
+            <span class="n">{{ quantity() }}</span>
+            <button type="button" aria-label="increase" (click)="inc()">+</button>
+          </div>
+          <button type="button" class="add" (click)="addToCart()">[ ADD TO CART ]</button>
+        </div>
+
+        <p class="trust">Free shipping over $100&nbsp;&nbsp;·&nbsp;&nbsp;30-day returns</p>
+      </div>
+    </div>
+  } @else {
+    <p class="status">product not found</p>
+  }
+</main>
+
+<app-cart-drawer />
+<app-status-bar mode="[INSERT]" />
