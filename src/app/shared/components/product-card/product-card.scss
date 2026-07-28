@@ -10,7 +10,12 @@
 }
 // gold border + 3D tilt (transform applied inline from the mouse position) on hover
 .card:hover {
-  border-color: var(--color-gold);
+  border: 2px solid var(--color-gold);
+}
+@media (max-width: 520px) {
+  .card {
+    border: 1px solid var(--color-gold);
+  }
 }
 
 // red textured backdrop behind each product
