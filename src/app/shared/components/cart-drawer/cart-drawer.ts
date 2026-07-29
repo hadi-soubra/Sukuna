@@ -1,10 +1,11 @@
 import { Component, DestroyRef, HostListener, effect, inject } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { CartStore } from '../../services/cart.store';
 
 @Component({
   selector: 'app-cart-drawer',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, RouterLink],
   templateUrl: './cart-drawer.html',
   styleUrl: './cart-drawer.scss',
 })

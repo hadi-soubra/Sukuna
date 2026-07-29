@@ -1,0 +1,201 @@
+.cart-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px clamp(24px, 4vw, 64px) 60px;
+}
+
+.page-title {
+  margin: 0 0 32px;
+  font-family: var(--font-terminal);
+  font-size: var(--text-lg);
+  font-weight: bold;
+  color: var(--color-text);
+}
+.page-title .slash,
+.page-title .count {
+  color: var(--color-gold);
+}
+
+/* ---- empty ---- */
+.empty {
+  padding: 80px 0;
+  text-align: center;
+}
+.empty-msg {
+  margin: 0 0 20px;
+  font-family: var(--font-terminal);
+  font-size: var(--text-md);
+  color: var(--color-muted);
+}
+.browse {
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+  font-weight: bold;
+  color: var(--color-gold);
+  text-decoration: none;
+}
+.browse:hover {
+  color: var(--color-text);
+}
+
+/* ---- layout ---- */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 800px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- line items ---- */
+.item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto auto;
+  gap: 20px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.25);
+}
+.thumb {
+  display: block;
+  width: 80px;
+  height: 80px;
+  background: #fff;
+}
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.info {
+  min-width: 0;
+}
+.name {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-sub);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  text-decoration: none;
+}
+.name:hover {
+  color: var(--color-gold);
+}
+.unit {
+  margin: 0 0 8px;
+  font-family: var(--font-terminal);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+.remove {
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-terminal);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  text-decoration: underline;
+}
+.remove:hover {
+  color: var(--color-red);
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+.qty button {
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: 1px solid var(--color-muted);
+  color: var(--color-text);
+  cursor: pointer;
+  line-height: 1;
+}
+.qty button:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+.qty .n {
+  min-width: 16px;
+  text-align: center;
+}
+
+.line-total {
+  margin: 0;
+  min-width: 70px;
+  text-align: right;
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+
+/* ---- summary ---- */
+.summary {
+  position: sticky;
+  top: 74px; // clear the sticky header
+  padding: 24px;
+  border: 1px solid var(--color-muted);
+}
+.summary-title {
+  margin: 0 0 20px;
+  font-family: var(--font-main);
+  font-size: var(--text-md);
+  color: var(--color-text);
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+.row.total {
+  margin: 16px 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-muted);
+  font-size: var(--text-md);
+  font-weight: bold;
+  color: var(--color-text);
+}
+.row.total span:last-child {
+  color: var(--color-gold);
+}
+.checkout {
+  display: block;
+  box-sizing: border-box; // keep padding inside the 100% so it doesn't overflow the box
+  width: 100%;
+  margin-top: 8px;
+  padding: 16px;
+  text-align: center;
+  text-decoration: none;
+  background: var(--color-red);
+  color: var(--color-black);
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: opacity 0.15s ease;
+}
+.checkout:hover {
+  opacity: 0.9;
+}
+.note {
+  margin: 12px 0 0;
+  text-align: center;
+  font-family: var(--font-terminal);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
