@@ -1,3 +1,62 @@
-<div style="height: 1000px; width: 100%;">
-<ag-grid-angular style="height: 100%" [rowData]="rowData" [columnDefs]="colDefs" [pagination]="true" />
-</div>
+<header class="admin-bar">
+  <a class="brand" routerLink="/shop">
+    <span class="name">SUKUNA</span>
+    <img class="jp" src="favicon.png" alt="店" />
+    <span class="tag">// admin</span>
+  </a>
+  <button type="button" class="logout" (click)="logout()">[<span class="lbl">logout</span>]</button>
+</header>
+
+<main class="admin">
+  <nav class="tabs">
+    <button type="button" class="tab" [class.active]="tab() === 'stats'" (click)="tab.set('stats')">[<span class="lbl">stats</span>]</button>
+    <button type="button" class="tab" [class.active]="tab() === 'log'" (click)="tab.set('log')">[<span class="lbl">log</span>]</button>
+    <button type="button" class="tab" [class.active]="tab() === 'products'" (click)="tab.set('products')">[<span class="lbl">products</span>]</button>
+  </nav>
+
+  @switch (tab()) {
+    @case ('stats') {
+      <section class="stats">
+        <div class="stat">
+          <span class="num">{{ totalProducts }}</span>
+          <span class="lbl">products</span>
+        </div>
+        <div class="stat">
+          <span class="num">{{ outOfStock }}</span>
+          <span class="lbl">out of stock</span>
+        </div>
+        <div class="stat">
+          <span class="num">{{ inStockUnits }}</span>
+          <span class="lbl">in-stock units</span>
+        </div>
+        <div class="stat">
+          <span class="num">{{ inventoryValue | currency }}</span>
+          <span class="lbl">inventory value</span>
+        </div>
+      </section>
+    }
+
+    @case ('log') {
+      <ul class="feed">
+        @for (e of activity; track $index) {
+          <li class="event">
+            <span class="type type--{{ e.type }}">{{ e.type }}</span>
+            <span class="label">{{ e.label }}</span>
+            <span class="time">{{ e.time }}</span>
+          </li>
+        }
+      </ul>
+    }
+
+    @case ('products') {
+      <ag-grid-angular
+        class="grid"
+        [rowData]="rowData"
+        [columnDefs]="colDefs"
+        [pagination]="true"
+      />
+    }
+  }
+</main>
+
+<app-status-bar mode="[ADMIN]" />
