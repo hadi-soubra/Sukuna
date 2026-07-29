@@ -185,6 +185,20 @@
 .checkout:hover {
   opacity: 0.9;
 }
+.view-cart {
+  display: block;
+  margin-top: 12px;
+  text-align: center;
+  text-decoration: none;
+  font-family: var(--font-terminal);
+  font-size: var(--text-xs);
+  font-weight: bold;
+  color: var(--color-gold);
+  transition: color 0.15s ease;
+}
+.view-cart:hover {
+  color: var(--color-text);
+}
 .note {
   margin: 12px 0 0;
   text-align: center;

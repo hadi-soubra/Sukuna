@@ -1,0 +1,56 @@
+<app-header />
+
+<main class="cart-page">
+  <h1 class="page-title">
+    <span class="slash">//</span> Cart <span class="count">[{{ cart.count() }}]</span>
+  </h1>
+
+  @if (cart.items().length === 0) {
+    <div class="empty">
+      <p class="empty-msg">your cart is empty</p>
+      <a class="browse" routerLink="/shop">[ browse the drop ]</a>
+    </div>
+  } @else {
+    <div class="layout">
+      <div class="items">
+        @for (item of cart.items(); track item.product.id) {
+          <div class="item">
+            <a class="thumb" [routerLink]="['/product', item.product.id]">
+              <img [src]="item.product.image" [alt]="item.product.title" />
+            </a>
+
+            <div class="info">
+              <a class="name" [routerLink]="['/product', item.product.id]">{{ item.product.title }}</a>
+              <p class="unit">{{ item.product.price | currency }}</p>
+              <button type="button" class="remove" (click)="cart.remove(item.product.id)">remove</button>
+            </div>
+
+            <div class="qty">
+              <button type="button" aria-label="decrease" (click)="cart.updateQty(item.product.id, item.quantity - 1)">−</button>
+              <span class="n">{{ item.quantity }}</span>
+              <button type="button" aria-label="increase" (click)="cart.updateQty(item.product.id, item.quantity + 1)">+</button>
+            </div>
+
+            <p class="line-total">{{ item.product.price * item.quantity | currency }}</p>
+          </div>
+        }
+      </div>
+
+      <aside class="summary">
+        <h2 class="summary-title">Order Summary</h2>
+        <div class="row"><span>Subtotal</span><span>{{ cart.total() | currency }}</span></div>
+        <div class="row">
+          <span>Shipping</span>
+          <span>{{ cart.shipping() === 0 ? 'Free' : (cart.shipping() | currency) }}</span>
+        </div>
+        <div class="row total"><span>Total</span><span>{{ cart.grandTotal() | currency }}</span></div>
+
+        <a class="checkout" routerLink="/checkout">[CHECKOUT]</a>
+      </aside>
+    </div>
+  }
+</main>
+
+<app-menu-sidebar />
+<app-cart-drawer />
+<app-status-bar mode="[NORMAL]" />
