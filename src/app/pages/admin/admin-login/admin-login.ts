@@ -68,7 +68,13 @@ export class AdminLogin {
       .subscribe({
         next: () => {
           this.loading.set(false);
-          this.router.navigate(['/admin']);
+          // only admins get in; anyone else is signed back out
+          if (this.auth.currentUser?.role === 'admin') {
+            this.router.navigate(['/admin']);
+          } else {
+            this.auth.clearSession();
+            this.errorMessage.set('This account does not have admin access.');
+          }
         },
         error: (err: HttpErrorResponse) => {
           this.loading.set(false);
