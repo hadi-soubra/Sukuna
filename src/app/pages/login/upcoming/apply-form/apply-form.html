@@ -9,7 +9,7 @@
 <p class="subtitle">誰もが入れるわけではありません</p>
 
 <form [formGroup]="applyForm" (ngSubmit)="onSubmit()">
-    <p class="section-label">[ 01 ] create your credentials</p>
+    <p class="section-label">[01] create your credentials</p>
     <section class="credentials">
         <label>
         First name
@@ -48,7 +48,7 @@
         <span>creating credentials doesn't grant access. Your email and password only activate once an application is approved.</span>
     </p>
 
-    <p class="section-label">[ 02 ] show us your 'vibe'</p>
+    <p class="section-label">[02] show us your 'vibe'</p>
     <section class="uploads">
         <div class="drop-zone">Drop an image</div>
         <div class="drop-zone">Drop an image</div>
@@ -70,7 +70,7 @@
       <p class="form-error">{{ errorMessage() }}</p>
     }
 
-    <button type="submit" [disabled]="applyForm.invalid || loading()">
-      {{ loading() ? '[ Submitting... ]' : '[ Complete Application ]' }}
+    <button type="submit" class="btn" [disabled]="applyForm.invalid || loading()">
+      {{ loading() ? '[Submitting...]' : '[Complete Application]' }}
     </button>
 </form>

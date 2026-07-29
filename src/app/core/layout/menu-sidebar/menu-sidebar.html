@@ -26,7 +26,7 @@
     <nav class="categories">
       @for (cat of categories(); track cat.label) {
         <a class="cat" [routerLink]="cat.link" (click)="ui.closeMenu()">
-          <span class="name">[ <span class="lbl">{{ cat.label }}</span> ]</span>
+          <span class="name">[<span class="lbl">{{ cat.label }}</span>]</span>
           <span class="count">{{ cat.count }}</span>
         </a>
       }

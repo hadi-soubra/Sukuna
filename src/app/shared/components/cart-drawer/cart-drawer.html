@@ -38,7 +38,7 @@
         </div>
         <div class="row total"><span>Total</span><span>{{ cart.grandTotal() | currency }}</span></div>
 
-        <button type="button" class="checkout" (click)="cart.closeCart()">[CHECKOUT]</button>
+        <button type="button" class="btn checkout" (click)="cart.closeCart()">[CHECKOUT]</button>
         <a class="view-cart" routerLink="/cart" (click)="cart.closeCart()">[view full cart]</a>
       </footer>
     }

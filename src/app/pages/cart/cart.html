@@ -7,8 +7,8 @@
 
   @if (cart.items().length === 0) {
     <div class="empty">
-      <p class="empty-msg">your cart is empty</p>
-      <a class="browse" routerLink="/shop">[ browse the drop ]</a>
+      <p class="empty-msg">your cart is empty, the drops might end any second, dont take your time</p>
+      <a class="browse" routerLink="/shop">[browse the drop]</a>
     </div>
   } @else {
     <div class="layout">
@@ -45,7 +45,7 @@
         </div>
         <div class="row total"><span>Total</span><span>{{ cart.grandTotal() | currency }}</span></div>
 
-        <a class="checkout" routerLink="/checkout">[CHECKOUT]</a>
+        <a class="btn checkout" routerLink="/checkout">[CHECKOUT]</a>
       </aside>
     </div>
   }

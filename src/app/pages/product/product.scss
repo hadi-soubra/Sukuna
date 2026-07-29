@@ -133,21 +133,9 @@
   text-align: center;
 }
 
+// base styling comes from the global .btn class
 .add {
-  font-family: var(--font-terminal);
-  font-size: var(--text-sm);
-  font-weight: bold;
-  color: var(--color-black);
-  background: var(--color-red);
-  border: none;
   padding: 16px 40px;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: opacity 0.15s ease;
-}
-.add:hover {
-  opacity: 0.9;
 }
 
 // mobile: stack the add-to-cart button under the quantity selector

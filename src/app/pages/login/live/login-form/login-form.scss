@@ -88,21 +88,9 @@ input::placeholder {
   opacity: 0.5;
 }
 
+// base styling comes from the global .btn class
 button[type="submit"] {
   width: 100%;
-  font-family: var(--font-terminal);
-  font-size: var(--text-sm);
-  font-weight: bold;
-  color: var(--color-black);
-  background: var(--color-red);
-  border: none;
-  border-radius: 4px;
-  padding: 16px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: opacity 0.15s ease;
   margin-top: 4rem;
 }
 

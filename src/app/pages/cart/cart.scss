@@ -172,22 +172,11 @@
 .row.total span:last-child {
   color: var(--color-gold);
 }
+// base styling comes from the global .btn class (.checkout is an <a>, so force block + full width)
 .checkout {
   display: block;
-  box-sizing: border-box; // keep padding inside the 100% so it doesn't overflow the box
   width: 100%;
   margin-top: 8px;
-  padding: 16px;
-  text-align: center;
-  text-decoration: none;
-  background: var(--color-red);
-  color: var(--color-black);
-  font-family: var(--font-terminal);
-  font-size: var(--text-sm);
-  font-weight: bold;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: opacity 0.15s ease;
 }
 .checkout:hover {
   opacity: 0.9;
