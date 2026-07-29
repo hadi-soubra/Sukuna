@@ -27,7 +27,7 @@ export class StatusBar {
       )
       .subscribe((e) => this.path.set(this.toPath(e.urlAfterRedirects)));
 
-    // live clock — ticks every second
+    // live clock ticks every second
     const clockId = setInterval(() => this.clock.set(this.now()), 1000);
     this.destroyRef.onDestroy(() => clearInterval(clockId));
   }

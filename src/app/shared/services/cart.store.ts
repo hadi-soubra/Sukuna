@@ -30,7 +30,7 @@ export const CartStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
 
-  // Derived state — recompute automatically when items change.
+  // Derived state recompute automatically when items change.
   withComputed(({ items }) => {
     const total = computed(() =>
       items().reduce((sum, i) => sum + i.product.price * i.quantity, 0)

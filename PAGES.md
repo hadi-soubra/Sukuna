@@ -54,11 +54,11 @@ Single route; `@switch (dropStatus.status())` renders one of these. Already buil
 One page, param-driven (a category or "all"). This is where filter/sort/search live.
 
 - [x] **Product grid** of cards (`pages/listing`, `/shop/:category`; `:category` = api string or `all`)
-- [x] **Sort** — price ↑/↓, rating, name (default name); gold-hover buttons. *(featured option removed per user)*
-- [x] **Filter** — max-price range slider (ceiling = highest price in the set)
-- [x] **Search** — live client-side title filter; also driven by the sidebar search via `?search=` query param
+- [x] **Sort** : price ↑/↓, rating, name (default name); gold-hover buttons. *(featured option removed per user)*
+- [x] **Filter** : max-price range slider (ceiling = highest price in the set)
+- [x] **Search** : live client-side title filter; also driven by the sidebar search via `?search=` query param
 - [x] Category = server call (`getByCategory` / `getAll` for "all"); sort + price-filter + search = client-side computed pipeline over the returned list
-- [x] **Empty state** — "no products match."
+- [x] **Empty state** : "no products match."
 - Entry points wired: sidebar categories + "All", storefront `[ view all ]` buttons, sidebar search (Enter → `/shop/all?search=`)
 
 
