@@ -74,10 +74,10 @@ One page, param-driven (a category or "all"). This is where filter/sort/search l
 
 The full-page version of the drawer (same CartService).
 
-- [ ] Line items : image, title, unit price, qty stepper, remove, line total
-- [ ] Order summary : subtotal, shipping rule (free over $100), total
+- [x] Line items : image, title, unit price, qty stepper, remove, line total
+- [x] Order summary : subtotal, shipping rule (free over $100), total
 - [ ] **CHECKOUT** button → `/checkout`
-- [ ] **Empty cart state** : message + "browse the drop" link
+- [x] **Empty cart state** : message + "browse the drop" link
 
 
 

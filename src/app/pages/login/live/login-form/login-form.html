@@ -27,7 +27,7 @@
       <p class="form-error">{{ errorMessage() }}</p>
     }
 
-    <button type="submit" [disabled]="loginForm.invalid || loading()">
-      {{ loading() ? '[ LOGGING IN... ]' : '[ LOG IN ]' }}
+    <button type="submit" class="btn" [disabled]="loginForm.invalid || loading()">
+      {{ loading() ? '[LOGGING IN...]' : '[LOG IN]' }}
     </button>
 </form>

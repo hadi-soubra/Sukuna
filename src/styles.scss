@@ -29,3 +29,29 @@ body {
     color: var(--color-text);
     font-family: var(--font-sub);
 }
+
+// canonical button — one style, straight edges (no border-radius)
+.btn {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 16px;
+    background: var(--color-red);
+    color: var(--color-black);
+    border: none;
+    font-family: var(--font-terminal);
+    font-size: var(--text-sm);
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+.btn:hover {
+    opacity: 0.9;
+}
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

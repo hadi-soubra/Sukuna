@@ -167,20 +167,9 @@
 .row.total span:last-child {
   color: var(--color-gold);
 }
+// base styling comes from the global .btn class
 .checkout {
-
-  font-family: var(--font-terminal);
-  font-size: var(--text-sm);
-  font-weight: bold;
-  color: var(--color-black);
-  background: var(--color-red);
-  border: none;
-  padding: 16px 40px;
-  letter-spacing: 0.1em;
   width: 100%;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: opacity 0.15s ease;
 }
 .checkout:hover {
   opacity: 0.9;
