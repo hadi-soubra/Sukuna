@@ -4,7 +4,6 @@ import { RouterLink } from '@angular/router';
 import { AllCommunityModule, ModuleRegistry, ColDef } from 'ag-grid-community';
 import { AgGridAngular } from 'ag-grid-angular';
 import prods from '../prod.json';
-import { StatusBar } from '../../../core/layout/status-bar/status-bar';
 import { AuthService } from '../../../core/auth/auth.service';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -17,7 +16,7 @@ interface ActivityRow {
 
 @Component({
   selector: 'app-admin-page',
-  imports: [AgGridAngular, StatusBar, RouterLink, CurrencyPipe],
+  imports: [AgGridAngular, RouterLink, CurrencyPipe],
   templateUrl: './admin-page.html',
   styleUrl: './admin-page.scss',
 })
