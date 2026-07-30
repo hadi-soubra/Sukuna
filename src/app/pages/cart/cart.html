@@ -3,11 +3,16 @@
 <main class="cart-page">
   <h1 class="page-title">
     <span class="slash">//</span> Cart <span class="count">[{{ cart.count() }}]</span>
+    @if (cart.ownerEmail()) {
+      <span class="owner">{{ cart.ownerEmail() }}</span>
+    }
   </h1>
 
   @if (cart.items().length === 0) {
     <div class="empty">
-      <p class="empty-msg">your cart is empty, the drops might end any second, dont take your time</p>
+      <p class="empty-msg">
+        your cart is empty, the drops might end any second, dont take your time
+      </p>
       <a class="browse" routerLink="/shop">[browse the drop]</a>
     </div>
   } @else {
@@ -20,15 +25,31 @@
             </a>
 
             <div class="info">
-              <a class="name" [routerLink]="['/product', item.product.id]">{{ item.product.title }}</a>
+              <a class="name" [routerLink]="['/product', item.product.id]">{{
+                item.product.title
+              }}</a>
               <p class="unit">{{ item.product.price | currency }}</p>
-              <button type="button" class="remove" (click)="cart.remove(item.product.id)">remove</button>
+              <button type="button" class="remove" (click)="cart.remove(item.product.id)">
+                remove
+              </button>
             </div>
 
             <div class="qty">
-              <button type="button" aria-label="decrease" (click)="cart.updateQty(item.product.id, item.quantity - 1)">−</button>
+              <button
+                type="button"
+                aria-label="decrease"
+                (click)="cart.updateQty(item.product.id, item.quantity - 1)"
+              >
+                −
+              </button>
               <span class="n">{{ item.quantity }}</span>
-              <button type="button" aria-label="increase" (click)="cart.updateQty(item.product.id, item.quantity + 1)">+</button>
+              <button
+                type="button"
+                aria-label="increase"
+                (click)="cart.updateQty(item.product.id, item.quantity + 1)"
+              >
+                +
+              </button>
             </div>
 
             <p class="line-total">{{ item.product.price * item.quantity | currency }}</p>
@@ -38,12 +59,16 @@
 
       <aside class="summary">
         <h2 class="summary-title">Order Summary</h2>
-        <div class="row"><span>Subtotal</span><span>{{ cart.total() | currency }}</span></div>
+        <div class="row">
+          <span>Subtotal</span><span>{{ cart.total() | currency }}</span>
+        </div>
         <div class="row">
           <span>Shipping</span>
           <span>{{ cart.shipping() === 0 ? 'Free' : (cart.shipping() | currency) }}</span>
         </div>
-        <div class="row total"><span>Total</span><span>{{ cart.grandTotal() | currency }}</span></div>
+        <div class="row total">
+          <span>Total</span><span>{{ cart.grandTotal() | currency }}</span>
+        </div>
 
         <a class="btn checkout" routerLink="/checkout">[CHECKOUT]</a>
       </aside>

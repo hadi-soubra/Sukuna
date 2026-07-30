@@ -1,4 +1,4 @@
-import { computed, effect } from '@angular/core';
+import { computed, effect, inject } from '@angular/core';
 import {
   signalStore,
   withState,
@@ -9,22 +9,74 @@ import {
 } from '@ngrx/signals';
 import { IProduct } from '../interfaces/IProduct';
 import { ICartItem } from '../interfaces/ICartItem';
+import { AuthService } from '../../core/auth/auth.service';
 
-const STORAGE_KEY = 'sukuna-cart';
+const STORAGE_KEY = 'sukuna-carts';
+const LEGACY_STORAGE_KEY = 'sukuna-cart';
 
-// Read the saved cart on startup. try/catch guards bad JSON or no localStorage.
-function loadCart(): ICartItem[] {
+type StoredCarts = Record<string, ICartItem[]>;
+
+function normalizeEmail(email: string): string {
+  return email.trim().toLowerCase();
+}
+
+function loadCarts(): StoredCarts {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as ICartItem[]) : [];
+    if (!raw) return {};
+
+    const parsed: unknown = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed)
+      ? (parsed as StoredCarts)
+      : {};
   } catch {
-    return [];
+    return {};
   }
 }
 
-type CartState = { items: ICartItem[]; isOpen: boolean };
+function loadCart(email: string): ICartItem[] {
+  const cart = loadCarts()[normalizeEmail(email)];
+  return Array.isArray(cart) ? cart : [];
+}
 
-const initialState: CartState = { items: loadCart(), isOpen: false };
+function saveCart(email: string, items: ICartItem[]): void {
+  const ownerEmail = normalizeEmail(email);
+  if (!ownerEmail) return;
+
+  try {
+    const carts = loadCarts();
+
+    if (items.length) {
+      carts[ownerEmail] = items;
+    } else {
+      delete carts[ownerEmail];
+    }
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(carts));
+  } catch {
+    // Keep the in-memory cart usable if browser storage is unavailable.
+  }
+}
+
+function removeLegacyCart(): void {
+  try {
+    localStorage.removeItem(LEGACY_STORAGE_KEY);
+  } catch {
+    // Nothing else is needed when browser storage is unavailable.
+  }
+}
+
+type CartState = {
+  ownerEmail: string;
+  items: ICartItem[];
+  isOpen: boolean;
+};
+
+const initialState: CartState = {
+  ownerEmail: '',
+  items: [],
+  isOpen: false,
+};
 
 export const CartStore = signalStore(
   { providedIn: 'root' },
@@ -32,9 +84,7 @@ export const CartStore = signalStore(
 
   // Derived state recompute automatically when items change.
   withComputed(({ items }) => {
-    const total = computed(() =>
-      items().reduce((sum, i) => sum + i.product.price * i.quantity, 0)
-    );
+    const total = computed(() => items().reduce((sum, i) => sum + i.product.price * i.quantity, 0));
     // free shipping over $100 (and on an empty cart), otherwise a flat $10
     const shipping = computed(() => (total() >= 100 || total() === 0 ? 0 : 10));
     return {
@@ -53,9 +103,7 @@ export const CartStore = signalStore(
       if (existing) {
         patchState(store, {
           items: items.map((i) =>
-            i.product.id === product.id
-              ? { ...i, quantity: i.quantity + quantity }
-              : i
+            i.product.id === product.id ? { ...i, quantity: i.quantity + quantity } : i,
           ),
         });
       } else {
@@ -72,9 +120,7 @@ export const CartStore = signalStore(
         return;
       }
       patchState(store, {
-        items: store
-          .items()
-          .map((i) => (i.product.id === productId ? { ...i, quantity } : i)),
+        items: store.items().map((i) => (i.product.id === productId ? { ...i, quantity } : i)),
       });
     },
 
@@ -100,12 +146,32 @@ export const CartStore = signalStore(
     },
   })),
 
-  // Persist the cart to localStorage on every change.
-  withHooks({
-    onInit(store) {
-      effect(() => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(store.items()));
-      });
-    },
-  })
+  // Swap and persist carts whenever the authenticated account changes.
+  withHooks((store) => {
+    const auth = inject(AuthService);
+
+    return {
+      onInit() {
+        removeLegacyCart();
+
+        const syncOwner = () => {
+          const ownerEmail = normalizeEmail(auth.currentUserEmail());
+          if (ownerEmail === store.ownerEmail()) return;
+
+          patchState(store, {
+            ownerEmail,
+            items: ownerEmail ? loadCart(ownerEmail) : [],
+            isOpen: false,
+          });
+        };
+
+        syncOwner();
+        effect(syncOwner);
+
+        effect(() => {
+          saveCart(store.ownerEmail(), store.items());
+        });
+      },
+    };
+  }),
 );
