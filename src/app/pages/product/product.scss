@@ -1,6 +1,6 @@
 .product {
   box-sizing: border-box; // include padding in the height so the page doesn't overflow
-  min-height: calc(100dvh - 51px); // viewport minus the header (50px + 1px border)
+  min-height: calc(100dvh - var(--header-height) - 1px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

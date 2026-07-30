@@ -1,57 +1,60 @@
 :root {
+  //colors
+  --color-bg: #0b0a0b;
+  --color-text: #ece8e1;
+  --color-gold: #c29c25;
+  --color-red: #c8362a;
+  --color-black: #000000;
+  --color-muted: #646463;
 
-    //colors
-    --color-bg: #0b0a0b;
-    --color-text: #ECE8E1;
-    --color-gold: #C29C25;
-    --color-red: #C8362A;
-    --color-black: #000000;
-    --color-muted: #646463;
+  //layout
+  --header-height: 64px;
+  --footer-height: 39px;
 
-    //fonts
-    --font-terminal: 'JetBrains Mono';
-    --font-jp: 'Noto Sans JP';
-    --font-main: 'Shippori Mincho';
-    --font-sub: 'Zen Kaku Gothic New';
+  //fonts
+  --font-terminal: 'JetBrains Mono';
+  --font-jp: 'Noto Sans JP';
+  --font-main: 'Shippori Mincho';
+  --font-sub: 'Zen Kaku Gothic New';
 
-    //font sizes
-    --text-xs: clamp(9px, 2.5vw, 10px);
-    --text-sm: clamp(13px, 3vw, 14px);
-    --text-md: clamp(15px, 3.5vw, 20px);
-    --text-lg: clamp(24px, 5vw, 32px);
-    --text-xl: clamp(32px, 12vw, 100px);
+  //font sizes
+  --text-xs: clamp(9px, 2.5vw, 10px);
+  --text-sm: clamp(13px, 3vw, 14px);
+  --text-md: clamp(15px, 3.5vw, 20px);
+  --text-lg: clamp(24px, 5vw, 32px);
+  --text-xl: clamp(32px, 12vw, 100px);
 }
 
 body {
-    margin: 0;
-    min-height: 100dvh;
-    background: var(--color-bg);
-    color: var(--color-text);
-    font-family: var(--font-sub);
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sub);
 }
 
 // canonical button one style, straight edges (no border-radius)
 .btn {
-    box-sizing: border-box;
-    display: inline-block;
-    padding: 16px;
-    background: var(--color-red);
-    color: var(--color-black);
-    border: none;
-    font-family: var(--font-terminal);
-    font-size: var(--text-sm);
-    font-weight: bold;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    transition: opacity 0.15s ease;
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 16px;
+  background: var(--color-red);
+  color: var(--color-black);
+  border: none;
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
 }
 .btn:hover {
-    opacity: 0.9;
+  opacity: 0.9;
 }
 .btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  opacity: 0.5;
+  cursor: not-allowed;
 }

@@ -109,8 +109,8 @@ export class AdminPage {
     rowHoverColor: '#161616',
     oddRowBackgroundColor: '#100f10',
     accentColor: '#C8362A',
-    fontFamily: 'JetBrains Mono',
-    headerFontFamily: 'JetBrains Mono',
+    fontFamily: 'var(--font-terminal)',
+    headerFontFamily: 'var(--font-terminal)',
     fontSize: 13,
     browserColorScheme: 'dark',
     wrapperBorderRadius: 0,
@@ -189,7 +189,7 @@ export class AdminPage {
         const inStock = p.value > 0;
         const bg = inStock ? '#C29C25' : '#C8362A';
         const label = inStock ? 'in stock' : 'out of stock';
-        return `<span style="display:inline-block;box-sizing:border-box;min-width:92px;text-align:center;padding:3px 8px;background:${bg};color:#000;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">${label}</span>`;
+        return `<span style="display:inline-block;box-sizing:border-box;min-width:92px;text-align:center;padding:3px 8px;background:${bg};color:#000;font-family:var(--font-terminal);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">${label}</span>`;
       },
     },
   ];

@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
+  height: var(--header-height);
   padding: 0 24px;
   background: var(--color-bg);
   border-bottom: 1px solid var(--color-gold);
@@ -131,7 +131,9 @@
   color: var(--color-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: color 0.15s ease, background 0.15s ease;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease;
 }
 .drop-btn:last-child {
   border-right: none;
@@ -360,7 +362,9 @@
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: color 0.15s ease, background 0.15s ease;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease;
 }
 .act.accept {
   border-color: var(--color-gold);
@@ -407,11 +411,11 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  height: 26px;
+  height: var(--footer-height);
   background: var(--color-bg);
   border-top: 1px solid var(--color-gold);
   font-family: var(--font-terminal);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: 700;
   letter-spacing: 0.08em;
   user-select: none;
@@ -441,7 +445,7 @@
   border: none;
   cursor: pointer;
   font-family: var(--font-terminal);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;

@@ -7,9 +7,6 @@
         <span
           >Cart <span class="count">[{{ cart.count() }}]</span></span
         >
-        @if (cart.ownerEmail()) {
-          <span class="owner">{{ cart.ownerEmail() }}</span>
-        }
       </h2>
       <button type="button" class="esc" (click)="cart.closeCart()">
         [<span class="lbl">esc</span>]
