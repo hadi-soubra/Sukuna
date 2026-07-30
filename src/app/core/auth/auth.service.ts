@@ -1,93 +1,133 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { CookieService } from "ngx-cookie-service";
-import { map, Observable } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { map, Observable, tap } from 'rxjs';
 import { IUser } from './IUser';
-import { tap } from 'rxjs/operators';
 
+const ACTIVE_EMAIL_KEY = 'sukuna-active-user-email';
 
 @Injectable({
-    providedIn: 'root'
-    })
-
+  providedIn: 'root',
+})
 export class AuthService {
-    constructor(
-        private router: Router,
-        private http: HttpClient,
-        private cookieService: CookieService,
-    ) {}
-    baseURL = 'http://localhost:4000/api/';
-    tokenkey = 'token';
-    currentUser :  IUser | undefined;
+  readonly baseURL = 'http://localhost:4000/api/';
+  readonly tokenkey = 'token';
+  readonly currentUserEmail = signal('');
 
-    getToken(): string {
-        return this.cookieService.get(this.tokenkey);
+  currentUser: IUser | undefined;
+
+  constructor(
+    private readonly router: Router,
+    private readonly http: HttpClient,
+    private readonly cookieService: CookieService,
+  ) {
+    if (this.getToken()) {
+      this.currentUserEmail.set(this.loadStoredEmail());
+    } else {
+      this.removeStoredEmail();
     }
+  }
 
-    setToken(token: string): void {
-        this.cookieService.set(this.tokenkey, token, {path: '/' , expires: 7});
+  getToken(): string {
+    return this.cookieService.get(this.tokenkey);
+  }
+
+  setToken(token: string): void {
+    this.cookieService.set(this.tokenkey, token, { path: '/', expires: 7 });
+  }
+
+  register(payload: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    dateOfBirth: string;
+  }): Observable<string | undefined> {
+    const body = {
+      firstName: payload.firstName,
+      lastName: payload.lastName,
+      email: payload.email,
+      password: payload.password,
+      dateOfBirth: payload.dateOfBirth,
+      username: payload.email,
+      role: 'user',
+    };
+
+    return this.http
+      .post<{ token: string; user: IUser }>(`${this.baseURL}auth/register`, body)
+      .pipe(
+        tap((response) => this.setSession(response.user, response.token)),
+        map((response) => response.token),
+      );
+  }
+
+  authenticate(email: string, password: string): Observable<string | undefined> {
+    return this.http
+      .post<{ token: string; user: IUser }>(`${this.baseURL}auth/login`, {
+        email,
+        password,
+      })
+      .pipe(
+        tap((response) => this.setSession(response.user, response.token)),
+        map((response) => response.token),
+      );
+  }
+
+  // Current user from the token (the auth interceptor attaches the bearer header).
+  getProfile(): Observable<IUser> {
+    return this.http.get<IUser>(`${this.baseURL}user`).pipe(tap((user) => this.rememberUser(user)));
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
+
+  // Clear the active identity without deleting any account's saved cart.
+  clearSession(): void {
+    this.cookieService.delete(this.tokenkey, '/');
+    this.currentUser = undefined;
+    this.currentUserEmail.set('');
+    this.removeStoredEmail();
+  }
+
+  logout(): void {
+    this.clearSession();
+    this.router.navigate(['/']);
+  }
+
+  private setSession(user: IUser, token: string): void {
+    if (!token) return;
+
+    this.setToken(token);
+    this.rememberUser(user);
+  }
+
+  private rememberUser(user: IUser): void {
+    const email = user.email.trim().toLowerCase();
+    this.currentUser = user;
+    this.currentUserEmail.set(email);
+
+    try {
+      localStorage.setItem(ACTIVE_EMAIL_KEY, email);
+    } catch {
+      // The in-memory identity still works if browser storage is unavailable.
     }
+  }
 
-
-    //add error handling
-    register(payload: { firstName: string; lastName: string; email: string; password: string; dateOfBirth: string }) {
-        const body = { firstName: payload.firstName , lastName: payload.lastName , email: payload.email, password: payload.password, dateOfBirth: payload.dateOfBirth, username: payload.email, role: 'user' };
-        return this.http
-        .post<{token: string; user: IUser}>(
-            `${this.baseURL}auth/register`,
-            body
-        )
-        .pipe(
-            tap((response) => {
-                if(!response.token) return;
-                this.currentUser = response.user;
-                this.setToken(response.token);
-            }),
-            map((response) => response.token)
-        )
+  private loadStoredEmail(): string {
+    try {
+      return (localStorage.getItem(ACTIVE_EMAIL_KEY) ?? '').trim().toLowerCase();
+    } catch {
+      return '';
     }
+  }
 
-    authenticate(
-        email: string,
-        password: string   
-    ): Observable<string | undefined> {
-        return this.http
-        .post<{token: string; user: IUser}>(
-            `${this.baseURL}auth/login`,
-            {   
-                email : email, 
-                password : password,
-            }
-        )
-        .pipe(
-            tap((response) => {
-                if(!response.token) return;
-                this.currentUser = response.user;
-                this.setToken(response.token);
-            }),
-            map((response) => response.token)
-        )
+  private removeStoredEmail(): void {
+    try {
+      localStorage.removeItem(ACTIVE_EMAIL_KEY);
+    } catch {
+      // Nothing else is needed when browser storage is unavailable.
     }
-
-    // current user from the token (auth interceptor attaches the bearer header)
-    getProfile(): Observable<IUser> {
-        return this.http.get<IUser>(`${this.baseURL}user`);
-    }
-
-    isAuthenticated(): boolean {
-        // i need to intrepret the token and sent it to the auth/check api to check if the token is valid and not expired based on the responce statuse 200 then valid or 401 notvlaid i contcare abput the responce just the responce state 
-        return !!this.getToken();
-    }
-
-    // clear the token + user without navigating (used when denying admin access)
-    clearSession(): void {
-        this.cookieService.delete(this.tokenkey, '/');
-        this.currentUser = undefined;
-    }
-
-    logout(): void {
-        this.clearSession();
-        this.router.navigate(['/']);
-    }
+  }
 }

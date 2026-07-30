@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:cart": "ng test --watch=false --include src/app/pages/cart/cart.spec.ts"
+    "test:cart": "ng test --watch=false --include \"src/app/**/cart*.spec.ts\""
   },
   "private": true,
   "packageManager": "npm@11.18.0",

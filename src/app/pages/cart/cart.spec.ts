@@ -32,6 +32,7 @@ function createCartMock(initialItems: ICartItem[]) {
   const shipping = computed(() => (total() >= 100 || total() === 0 ? 0 : 10));
 
   return {
+    ownerEmail: signal('hadi@example.com'),
     items,
     isOpen,
     count: computed(() => items().reduce((sum, item) => sum + item.quantity, 0)),
@@ -80,6 +81,7 @@ describe('Cart', () => {
     await renderCart();
 
     expect(screen.getByRole('heading', { name: /cart \[2\]/i })).toBeTruthy();
+    expect(screen.getByText('hadi@example.com')).toBeTruthy();
     expect(screen.getByText('Sukuna Test Jacket')).toBeTruthy();
     expect(screen.getAllByText('$39.98')).toHaveLength(2);
     expect(screen.getByText('$49.98')).toBeTruthy();
