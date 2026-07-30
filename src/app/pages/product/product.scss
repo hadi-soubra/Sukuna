@@ -153,7 +153,7 @@
     var(--color-bg);
   object-fit: contain;
   pointer-events: none;
-  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.55));
+  filter: drop-shadow(0 10px 16px var(--color-black));
   transform: translate(-50%, -50%) scale(0.35);
   animation: cart-hop 800ms cubic-bezier(0.22, 0.8, 0.3, 1) forwards;
 }
@@ -209,7 +209,7 @@
 .trust {
   margin: 0;
   padding-top: 20px;
-  border-top: 1px solid rgba(100, 100, 100, 0.3);
+  border-top: 1px solid var(--color-muted);
   font-family: var(--font-terminal);
   font-size: var(--text-xs);
   color: var(--color-muted);
@@ -236,6 +236,7 @@
   font-size: var(--text-md);
   font-weight: bold;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
   color: var(--color-text);
 }
 

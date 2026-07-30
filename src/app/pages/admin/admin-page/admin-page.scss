@@ -102,7 +102,7 @@
   gap: 20px 48px;
   margin-bottom: 24px;
   padding: 20px 24px;
-  border: 1px solid rgba(100, 100, 100, 0.3);
+  border: 1px solid var(--color-muted);
 }
 .drop-row {
   display: flex;
@@ -128,7 +128,7 @@
   cursor: pointer;
   font-family: var(--font-terminal);
   font-size: var(--text-xs);
-  color: var(--color-muted);
+  color: var(--color-text);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   transition:
@@ -170,7 +170,7 @@
 }
 .card {
   padding: 20px;
-  border: 1px solid rgba(100, 100, 100, 0.3);
+  border: 1px solid var(--color-muted);
 }
 .card-label {
   margin: 0 0 14px;
@@ -207,7 +207,7 @@
 }
 .panel {
   padding: 24px;
-  border: 1px solid rgba(100, 100, 100, 0.3);
+  border: 1px solid var(--color-muted);
 }
 .panel-title {
   margin: 0 0 24px;
@@ -258,7 +258,7 @@
   align-items: center;
   gap: 14px;
   padding: 14px 0;
-  border-bottom: 1px solid rgba(100, 100, 100, 0.2);
+  border-bottom: 1px solid var(--color-muted);
   font-family: var(--font-sub);
   font-size: var(--text-sm);
 }
@@ -292,6 +292,7 @@
   font-family: var(--font-terminal);
   font-size: var(--text-md);
   font-weight: bold;
+  text-transform: uppercase;
   color: var(--color-text);
 }
 .users-title .slash,
@@ -308,7 +309,7 @@
   align-items: center;
   gap: 20px;
   padding: 18px 20px;
-  border: 1px solid rgba(100, 100, 100, 0.3);
+  border: 1px solid var(--color-muted);
 }
 .applicant-info {
   flex: 1;
@@ -336,7 +337,7 @@
   width: 60px;
   height: 60px;
   border: 1px dashed var(--color-gold);
-  background: rgba(194, 156, 37, 0.06);
+  background: var(--color-bg);
 }
 .applicant-status {
   padding: 3px 10px;

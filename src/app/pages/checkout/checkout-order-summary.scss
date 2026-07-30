@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(100, 100, 99, 0.5);
+  border-bottom: 1px solid var(--color-muted);
 }
 
 .summary-heading h2 {
@@ -27,7 +27,7 @@
   gap: 16px;
   align-items: center;
   padding: 18px 0;
-  border-bottom: 1px solid rgba(100, 100, 99, 0.25);
+  border-bottom: 1px solid var(--color-muted);
   color: var(--color-text);
   font-size: var(--text-sm);
 }
@@ -111,7 +111,7 @@
 .secure-note {
   margin: 0;
   padding: 12px;
-  border: 1px dashed rgba(194, 156, 37, 0.5);
+  border: 1px dashed var(--color-gold);
   color: var(--color-muted);
   font-size: var(--text-xs);
   text-align: center;

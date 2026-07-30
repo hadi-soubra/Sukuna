@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
   <style>
-    path { fill: #D9B444; }
-    @media (prefers-color-scheme: dark) { path { fill: #E8C65A; } }
+    path { fill: #c29c25; }
   </style>
   <g transform="translate(0,640) scale(0.1,-0.1)">
     <path d="M2854 5698 c21 -176 56 -621 56 -725 0 -11 -115 -13 -638 -13 l-639

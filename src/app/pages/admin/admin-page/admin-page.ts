@@ -101,14 +101,14 @@ export class AdminPage {
 
   // --- product grid, dark-themed to match the site ---
   protected readonly gridTheme = themeQuartz.withParams({
-    backgroundColor: '#0b0a0b',
-    foregroundColor: '#ECE8E1',
-    headerBackgroundColor: '#161616',
-    headerTextColor: '#C29C25',
-    borderColor: '#2a2a2a',
-    rowHoverColor: '#161616',
-    oddRowBackgroundColor: '#100f10',
-    accentColor: '#C8362A',
+    backgroundColor: 'var(--color-bg)',
+    foregroundColor: 'var(--color-text)',
+    headerBackgroundColor: 'var(--color-bg)',
+    headerTextColor: 'var(--color-gold)',
+    borderColor: 'var(--color-muted)',
+    rowHoverColor: 'var(--color-muted)',
+    oddRowBackgroundColor: 'var(--color-bg)',
+    accentColor: 'var(--color-red)',
     fontFamily: 'var(--font-terminal)',
     headerFontFamily: 'var(--font-terminal)',
     fontSize: 13,
@@ -187,9 +187,9 @@ export class AdminPage {
       // html pill: gold = in stock, red = out of stock
       cellRenderer: (p: { value: number }) => {
         const inStock = p.value > 0;
-        const bg = inStock ? '#C29C25' : '#C8362A';
+        const bg = inStock ? 'var(--color-gold)' : 'var(--color-red)';
         const label = inStock ? 'in stock' : 'out of stock';
-        return `<span style="display:inline-block;box-sizing:border-box;min-width:92px;text-align:center;padding:3px 8px;background:${bg};color:#000;font-family:var(--font-terminal);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">${label}</span>`;
+        return `<span style="display:inline-block;box-sizing:border-box;min-width:92px;text-align:center;padding:3px 8px;background:${bg};color:var(--color-black);font-family:var(--font-terminal);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;">${label}</span>`;
       },
     },
   ];
