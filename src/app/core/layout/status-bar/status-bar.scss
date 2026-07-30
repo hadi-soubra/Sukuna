@@ -53,3 +53,9 @@
   background: var(--color-gold);
   color: var(--color-black);
 }
+
+@media (max-width: 768px) {
+  .status-bar {
+    font-size: var(--text-xs);
+  }
+}

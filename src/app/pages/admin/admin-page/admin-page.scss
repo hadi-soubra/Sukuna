@@ -455,3 +455,10 @@
 .statusbar .logout-box:hover {
   background: var(--color-red);
 }
+
+@media (max-width: 768px) {
+  .statusbar,
+  .statusbar .logout-box {
+    font-size: var(--text-xs);
+  }
+}
