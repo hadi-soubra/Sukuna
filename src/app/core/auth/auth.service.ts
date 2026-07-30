@@ -70,6 +70,13 @@ export class AuthService {
         )
     }
 
+    // current user from the token (GET /user requires bearer auth)
+    getProfile(): Observable<IUser> {
+        return this.http.get<IUser>(`${this.baseURL}user`, {
+            headers: { Authorization: `Bearer ${this.getToken()}` },
+        });
+    }
+
     isAuthenticated(): boolean {
         // i need to intrepret the token and sent it to the auth/check api to check if the token is valid and not expired based on the responce statuse 200 then valid or 401 notvlaid i contcare abput the responce just the responce state 
         return !!this.getToken();
