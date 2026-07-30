@@ -1,0 +1,234 @@
+<header class="checkout-header">
+  <a class="brand" routerLink="/shop" aria-label="Sukuna shop">
+    <span>SUKUNA</span>
+    <img src="favicon.png" alt="" />
+  </a>
+</header>
+
+<main class="checkout-page" [class.confirmation-view]="confirmation()">
+  @if (confirmation(); as order) {
+    <section class="confirmation" aria-labelledby="confirmation-title">
+      <p class="kicker">ORDER CONFIRMED</p>
+      <h1 id="confirmation-title">Your drop is secured.</h1>
+
+      <div class="receipt">
+        <div>
+          <span>Order</span>
+          <strong>SKN-DEMO-001</strong>
+        </div>
+        <div>
+          <span>Items</span>
+          <strong>{{ order.items }}</strong>
+        </div>
+        <div>
+          <span>Total</span>
+          <strong>{{ order.total | currency }}</strong>
+        </div>
+      </div>
+
+      <a class="btn continue-shopping" routerLink="/shop">[RETURN TO THE DROP]</a>
+    </section>
+  } @else {
+    <div class="checkout-layout">
+      <div class="checkout-form">
+
+        <h1>Checkout</h1>
+
+        <form [formGroup]="checkoutForm" (ngSubmit)="confirmOrder()" novalidate>
+          <section class="form-section">
+            <div class="section-title">
+              <h2>Contact</h2>
+              <span>Secure checkout</span>
+            </div>
+
+            <label class="field">
+              <span>Email address</span>
+              <input
+                type="email"
+                formControlName="email"
+                autocomplete="email"
+                placeholder="Email address"
+                [class.invalid]="controlInvalid('email')"
+              />
+              @if (controlInvalid('email')) {
+                <small>Enter a valid email address.</small>
+              }
+            </label>
+          </section>
+
+          <section class="form-section">
+            <div class="section-title">
+              <h2>Delivery</h2>
+            </div>
+
+            <div class="form-grid">
+              <label class="field full">
+                <span>Country / region</span>
+                <input
+                  type="text"
+                  formControlName="country"
+                  autocomplete="country-name"
+                  placeholder="Country / region"
+                  [class.invalid]="controlInvalid('country')"
+                />
+                @if (controlInvalid('country')) {
+                  <small>Country is required.</small>
+                }
+              </label>
+
+              <label class="field full">
+                <span>Full name</span>
+                <input
+                  type="text"
+                  formControlName="fullName"
+                  autocomplete="name"
+                  placeholder="Full name"
+                  [class.invalid]="controlInvalid('fullName')"
+                />
+                @if (controlInvalid('fullName')) {
+                  <small>Enter the recipient's full name.</small>
+                }
+              </label>
+
+              <label class="field full">
+                <span>Address</span>
+                <input
+                  type="text"
+                  formControlName="address"
+                  autocomplete="street-address"
+                  placeholder="Address"
+                  [class.invalid]="controlInvalid('address')"
+                />
+                @if (controlInvalid('address')) {
+                  <small>Enter a complete address.</small>
+                }
+              </label>
+
+              <label class="field full">
+                <span>Apartment, suite, etc. (optional)</span>
+                <input
+                  type="text"
+                  formControlName="apartment"
+                  autocomplete="address-line2"
+                  placeholder="Apartment, suite, etc."
+                />
+              </label>
+
+              <label class="field">
+                <span>City</span>
+                <input
+                  type="text"
+                  formControlName="city"
+                  autocomplete="address-level2"
+                  placeholder="City"
+                  [class.invalid]="controlInvalid('city')"
+                />
+                @if (controlInvalid('city')) {
+                  <small>City is required.</small>
+                }
+              </label>
+
+              <label class="field">
+                <span>Postal code</span>
+                <input
+                  type="text"
+                  formControlName="postalCode"
+                  autocomplete="postal-code"
+                  placeholder="Postal code"
+                  [class.invalid]="controlInvalid('postalCode')"
+                />
+                @if (controlInvalid('postalCode')) {
+                  <small>Enter a valid postal code.</small>
+                }
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <div class="section-title">
+              <div>
+                <h2>Payment</h2>
+                <p>Use any test card details.</p>
+              </div>
+            </div>
+
+            <div class="card-fields">
+              <div class="form-grid">
+                <label class="field full">
+                  <span>Card number</span>
+                  <input
+                    type="text"
+                    formControlName="cardNumber"
+                    autocomplete="cc-number"
+                    inputmode="numeric"
+                    maxlength="23"
+                    placeholder="Card number"
+                    [class.invalid]="controlInvalid('cardNumber')"
+                    (input)="formatCardNumber($event)"
+                  />
+                  @if (controlInvalid('cardNumber')) {
+                    <small>Enter a valid 13–19 digit card number.</small>
+                  }
+                </label>
+
+                <label class="field">
+                  <span>Expiration date</span>
+                  <input
+                    type="text"
+                    formControlName="expiry"
+                    autocomplete="cc-exp"
+                    inputmode="numeric"
+                    maxlength="5"
+                    placeholder="MM/YY"
+                    [class.invalid]="controlInvalid('expiry')"
+                    (input)="formatExpiry($event)"
+                  />
+                  @if (controlInvalid('expiry')) {
+                    <small>Use MM/YY format.</small>
+                  }
+                </label>
+
+                <label class="field">
+                  <span>Security code</span>
+                  <input
+                    type="password"
+                    formControlName="cvv"
+                    autocomplete="cc-csc"
+                    inputmode="numeric"
+                    placeholder="CVV"
+                    [class.invalid]="controlInvalid('cvv')"
+                  />
+                  @if (controlInvalid('cvv')) {
+                    <small>Enter the 3–4 digit security code.</small>
+                  }
+                </label>
+
+                <label class="field full">
+                  <span>Name on card</span>
+                  <input
+                    type="text"
+                    formControlName="cardholder"
+                    autocomplete="cc-name"
+                    placeholder="Name on card"
+                    [class.invalid]="controlInvalid('cardholder')"
+                  />
+                  @if (controlInvalid('cardholder')) {
+                    <small>Enter the cardholder's name.</small>
+                  }
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <button type="submit" class="btn place-order">
+            [PLACE ORDER — {{ cart.grandTotal() | currency }}]
+          </button>
+        </form>
+      </div>
+
+      <app-checkout-order-summary />
+    </div>
+  }
+</main>
+
+<app-status-bar />
