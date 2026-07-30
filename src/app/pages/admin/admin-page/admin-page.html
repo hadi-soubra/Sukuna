@@ -9,10 +9,26 @@
   <nav class="tabs">
     <button type="button" class="tab" [class.active]="tab() === 'dashboard'" (click)="tab.set('dashboard')">[<span class="lbl">dashboard</span>]</button>
     <button type="button" class="tab" [class.active]="tab() === 'products'" (click)="tab.set('products')">[<span class="lbl">products</span>]</button>
+    <button type="button" class="tab" [class.active]="tab() === 'users'" (click)="tab.set('users')">[<span class="lbl">users</span>]</button>
   </nav>
 
   @switch (tab()) {
     @case ('dashboard') {
+      <section class="drop-control">
+        <div class="drop-row">
+          <span class="drop-label">// drop status</span>
+          <div class="drop-toggle">
+            @for (s of dropStatuses; track s) {
+              <button type="button" class="drop-btn" [class.active]="dropStatus.status() === s" (click)="dropStatus.status.set(s)">{{ s }}</button>
+            }
+          </div>
+        </div>
+        <div class="drop-row">
+          <span class="drop-label">// drop date</span>
+          <input type="datetime-local" class="drop-date" [value]="dropDateInput()" (change)="onDropDateChange($event)" />
+        </div>
+      </section>
+
       <section class="cards">
         @for (s of stats; track s.label) {
           <div class="card">
@@ -60,9 +76,44 @@
         [rowData]="rowData"
         [columnDefs]="colDefs"
         [defaultColDef]="defaultColDef"
-        [rowHeight]="85"
+        [rowHeight]="130"
         [pagination]="true"
+        (cellValueChanged)="onCellEdit($event)"
       />
+    }
+
+    @case ('users') {
+      <section class="users">
+        <h2 class="users-title">
+          <span class="slash">//</span> pending applications
+          <span class="count">[{{ pendingUsers().length }}]</span>
+        </h2>
+
+        @if (pendingUsers().length) {
+          <div class="applicants">
+            @for (u of pendingUsers(); track u.id) {
+              <div class="applicant">
+                <div class="applicant-info">
+                  <p class="applicant-name">{{ u.name }}</p>
+                  <p class="applicant-meta">{{ u.email }} · registered {{ u.registered }}</p>
+                  <div class="applicant-images">
+                    <div class="img-box"></div>
+                    <div class="img-box"></div>
+                    <div class="img-box"></div>
+                  </div>
+                </div>
+                <span class="applicant-status">pending</span>
+                <div class="applicant-actions">
+                  <button type="button" class="act accept" (click)="accept(u.id)">accept</button>
+                  <button type="button" class="act reject" (click)="reject(u.id)">reject</button>
+                </div>
+              </div>
+            }
+          </div>
+        } @else {
+          <p class="empty-users">no pending applications</p>
+        }
+      </section>
     }
   }
 </main>

@@ -1,5 +1,6 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { DropStatus, DropStatusType } from '../../../shared/services/drop-status';
 import {
   AllCommunityModule,
   ModuleRegistry,
@@ -12,6 +13,17 @@ import { AuthService } from '../../../core/auth/auth.service';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
+// description edits persist to localStorage (the browser can't write prod.json)
+const DESC_KEY = 'sukuna-product-desc';
+function loadDescOverrides(): Record<number, string> {
+  try {
+    return JSON.parse(localStorage.getItem(DESC_KEY) ?? '{}');
+  } catch {
+    return {};
+  }
+}
+const descOverrides = loadDescOverrides();
+
 @Component({
   selector: 'app-admin-page',
   imports: [AgGridAngular, RouterLink],
@@ -21,7 +33,26 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 export class AdminPage {
   private readonly auth = inject(AuthService);
 
-  protected readonly tab = signal<'dashboard' | 'products'>('dashboard');
+  protected readonly tab = signal<'dashboard' | 'products' | 'users'>('dashboard');
+
+  protected readonly dropStatus = inject(DropStatus);
+  protected readonly dropStatuses: DropStatusType[] = [
+    'Teaser',
+    'Upcoming',
+    'Live',
+    'Ended',
+  ];
+
+  protected readonly dropDateInput = computed(() => {
+    const d = this.dropStatus.dropDate();
+    const pad = (n: number) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  });
+
+  protected onDropDateChange(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    if (value) this.dropStatus.dropDate.set(new Date(value));
+  }
 
   // --- stat cards (static / visual) ---
   protected readonly stats = [
@@ -51,6 +82,23 @@ export class AdminPage {
     { tone: 'red', text: 'Refund processed · Order #4790', time: '5h ago' },
   ];
 
+  // --- pending applications (static / visual) ---
+  protected readonly pendingUsers = signal([
+    { id: 1, name: 'Kenji Tanaka', email: 'kenji@mail.jp', registered: '2026-07-28' },
+    { id: 2, name: 'Aoi Yamamoto', email: 'aoi.y@domain.com', registered: '2026-07-28' },
+    { id: 3, name: 'Marcus Chen', email: 'mchen@example.com', registered: '2026-07-27' },
+    { id: 4, name: 'Yuki Sato', email: 'yuki@sukuna.jp', registered: '2026-07-27' },
+    { id: 5, name: 'Blossom Ito', email: 'blossom@mail.jp', registered: '2026-07-26' },
+    { id: 6, name: 'David Park', email: 'dpark@domain.com', registered: '2026-07-26' },
+  ]);
+
+  protected accept(id: number): void {
+    this.pendingUsers.update((list) => list.filter((u) => u.id !== id));
+  }
+  protected reject(id: number): void {
+    this.pendingUsers.update((list) => list.filter((u) => u.id !== id));
+  }
+
   // --- product grid, dark-themed to match the site ---
   protected readonly gridTheme = themeQuartz.withParams({
     backgroundColor: '#0b0a0b',
@@ -65,6 +113,8 @@ export class AdminPage {
     headerFontFamily: 'JetBrains Mono',
     fontSize: 13,
     browserColorScheme: 'dark',
+    wrapperBorderRadius: 0,
+    borderRadius: 0,
   });
 
   rowData = prods.map((p) => ({
@@ -72,7 +122,7 @@ export class AdminPage {
     Image: p.image,
     Name: p.title,
     Category: p.category,
-    Description: p.description,
+    Description: descOverrides[p.id] ?? p.description,
     Price: p.price,
     Status: p.quantity,
   }));
@@ -109,18 +159,27 @@ export class AdminPage {
     {
       field: 'Description',
       flex: 3,
+      editable: true, // double-click to edit
       wrapText: true,
       autoHeight: true,
-      // full description, wrapped (override the centered default cell style)
+      // full description, wrapped + vertically centered
       cellStyle: {
-        display: 'block',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
         whiteSpace: 'normal',
         lineHeight: '1.6',
         padding: '12px 14px',
       },
-      cellEditor: 'agTextCellEditor',
+      cellEditor: 'agLargeTextCellEditor',
+      cellEditorPopup: true,
+      cellEditorParams: { maxLength: 2000, rows: 8, cols: 60 },
     },
-    { field: 'Price', maxWidth: 110 },
+    {
+      field: 'Price',
+      maxWidth: 110,
+      valueFormatter: (p: { value: number }) => '$' + p.value.toFixed(2),
+    },
     {
       headerName: 'Status',
       field: 'Status',
@@ -134,6 +193,19 @@ export class AdminPage {
       },
     },
   ];
+
+  // save an edited description to localStorage
+  protected onCellEdit(event: {
+    colDef: { field?: string };
+    data: Record<string, unknown>;
+  }): void {
+    if (event.colDef.field === 'Description') {
+      descOverrides[event.data['ID'] as number] = event.data[
+        'Description'
+      ] as string;
+      localStorage.setItem(DESC_KEY, JSON.stringify(descOverrides));
+    }
+  }
 
   protected logout(): void {
     this.auth.logout();
