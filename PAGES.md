@@ -25,7 +25,6 @@ These are the foundation. Nothing below moves until these exist.
 - [x] **`DropStatus`** (`shared/services/drop-status`) : root-singleton signals `status` + `dropDate`; **admin writes, gate reads**; persisted to `localStorage` and **synced across tabs** via the `storage` event.
 - [ ] **Route guards** : protect authed pages; redirect to gate if not logged in
 - [ ] **HTTP interceptor** : attach token to academy-api requests; handle 401 globally
-- [ ] **Cross-cutting states** : every data view needs loading + empty + error states
 
 
 
@@ -92,11 +91,11 @@ The full-page version of the drawer (same CartService).
 
 Simulated : no real payment. A multi-step flow:
 
-- [ ] **Step 1 : Contact / shipping** : name, email, address (reactive form + validation)
-- [ ] **Step 2 : Payment** : card fields (fake; reuse a saved payment method from profile if present)
-- [ ] **Step 3 : Review** : order summary, place order
-- [ ] **Order confirmation / success** : order number, clear the cart : *the flow needs an endpoint screen; you didn't list this*
-- [ ] Guarded : redirect to gate if not logged in; redirect to `/cart` if cart empty
+- [x] **Step 1 : Contact / shipping** : name, email, address (reactive form + validation)
+- [x] **Step 2 : Payment** : card fields (fake; reuse a saved payment method from profile if present)
+- [x] **Step 3 : Review** : order summary, place order
+- [x] **Order confirmation / success** : order number, clear the cart : *the flow needs an endpoint screen; you didn't list this*
+- [x] Guarded : redirect to gate if not logged in; redirect to `/cart` if cart empty
 
 
 
