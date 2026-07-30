@@ -68,7 +68,8 @@
           "defaultConfiguration": "development",
 
           "options": {
-            "allowedHosts": ["captionless-terri-nonverbal.ngrok-free.dev"]
+            "allowedHosts": ["captionless-terri-nonverbal.ngrok-free.dev"],
+            "proxyConfig": "src/proxy.conf.json"
           }
         },
         "test": {

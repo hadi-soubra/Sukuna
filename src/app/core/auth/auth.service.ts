@@ -11,7 +11,7 @@ const ACTIVE_EMAIL_KEY = 'sukuna-active-user-email';
   providedIn: 'root',
 })
 export class AuthService {
-  readonly baseURL = 'http://localhost:4000/api/';
+  readonly baseURL = '/api/';
   readonly tokenkey = 'token';
   readonly currentUserEmail = signal('');
 
