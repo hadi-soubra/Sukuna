@@ -8,6 +8,8 @@ import { Account } from './pages/account/account';
 import { AdminLogin } from './pages/admin/admin-login/admin-login';
 import { Checkout } from './pages/checkout/checkout';
 import { checkoutAccessGuard } from './core/auth/checkout-access.guard';
+import { authGuard } from './core/auth/auth.guard';
+import { adminGuard } from './core/auth/admin.guard';
 
 export const routes: Routes = [
   {
@@ -17,18 +19,22 @@ export const routes: Routes = [
   {
     path: 'shop',
     component: Shop,
+    canActivate: [authGuard],
   },
   {
     path: 'product/:id',
     component: Product,
+    canActivate: [authGuard],
   },
   {
     path: 'shop/:category',
     component: Listing,
+    canActivate: [authGuard],
   },
   {
     path: 'cart',
     component: Cart,
+    canActivate: [authGuard],
   },
   {
     path: 'checkout',
@@ -38,6 +44,7 @@ export const routes: Routes = [
   {
     path: 'account',
     component: Account,
+    canActivate: [authGuard],
   },
   {
     path: 'admin-login',
@@ -48,6 +55,7 @@ export const routes: Routes = [
     path: 'admin',
     loadComponent: () =>
       import('./pages/admin/admin-page/admin-page').then((module) => module.AdminPage),
+    canActivate: [adminGuard],
   },
   {
     path: '**',

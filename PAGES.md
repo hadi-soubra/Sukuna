@@ -23,8 +23,8 @@ These are the foundation. Nothing below moves until these exist.
 - [x] **Global `.btn`** (`styles.scss`) : one canonical red/black terminal button, straight edges — used by every CTA (login, add-to-cart, checkout…) so the style lives in one place.
 - [x] **`UiStore`** (`shared/services/ui.store`) : menu-sidebar open state.
 - [x] **`DropStatus`** (`shared/services/drop-status`) : root-singleton signals `status` + `dropDate`; **admin writes, gate reads**; persisted to `localStorage` and **synced across tabs** via the `storage` event.
-- [ ] **Route guards** : protect authed pages; redirect to gate if not logged in
-- [ ] **HTTP interceptor** : attach token to academy-api requests; handle 401 globally
+- [x] **Route guards** (`core/auth/auth.guard`, `admin.guard`) : `authGuard` on shop/product/listing/cart/account → gate `/` if no token; `adminGuard` on `/admin` verifies role via `getProfile()` → `/admin-login`; checkout keeps `checkoutAccessGuard`
+- [x] **HTTP interceptor** (`core/auth/auth.interceptor`) : attaches bearer token to academy-api calls only (not Fake Store); 401 on authed calls → clear session + redirect to gate (skips `/auth/*`)
 
 
 

@@ -87,7 +87,6 @@ constructor() {
     if (this.applyForm.invalid) {
       return;
     }
-    console.log(this.applyForm.value);
     this.submitted.emit({
       firstName: this.applyForm.value.firstName ?? '',
       lastName: this.applyForm.value.lastName ?? '',

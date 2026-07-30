@@ -70,11 +70,9 @@ export class AuthService {
         )
     }
 
-    // current user from the token (GET /user requires bearer auth)
+    // current user from the token (auth interceptor attaches the bearer header)
     getProfile(): Observable<IUser> {
-        return this.http.get<IUser>(`${this.baseURL}user`, {
-            headers: { Authorization: `Bearer ${this.getToken()}` },
-        });
+        return this.http.get<IUser>(`${this.baseURL}user`);
     }
 
     isAuthenticated(): boolean {
