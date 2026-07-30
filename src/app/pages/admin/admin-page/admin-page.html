@@ -1,3 +1,126 @@
-<div style="height: 1000px; width: 100%;">
-<ag-grid-angular style="height: 100%" [rowData]="rowData" [columnDefs]="colDefs" [pagination]="true" />
-</div>
+<header class="admin-bar">
+  <a class="brand" routerLink="/shop">
+    <span class="name">SUKUNA</span>
+    <img class="jp" src="favicon.png" alt="店" />
+  </a>
+</header>
+
+<main class="admin">
+  <nav class="tabs">
+    <button type="button" class="tab" [class.active]="tab() === 'dashboard'" (click)="tab.set('dashboard')">[<span class="lbl">dashboard</span>]</button>
+    <button type="button" class="tab" [class.active]="tab() === 'products'" (click)="tab.set('products')">[<span class="lbl">products</span>]</button>
+    <button type="button" class="tab" [class.active]="tab() === 'users'" (click)="tab.set('users')">[<span class="lbl">users</span>]</button>
+  </nav>
+
+  @switch (tab()) {
+    @case ('dashboard') {
+      <section class="drop-control">
+        <div class="drop-row">
+          <span class="drop-label">// drop status</span>
+          <div class="drop-toggle">
+            @for (s of dropStatuses; track s) {
+              <button type="button" class="drop-btn" [class.active]="dropStatus.status() === s" (click)="dropStatus.status.set(s)">{{ s }}</button>
+            }
+          </div>
+        </div>
+        <div class="drop-row">
+          <span class="drop-label">// drop date</span>
+          <input type="datetime-local" class="drop-date" [value]="dropDateInput()" (change)="onDropDateChange($event)" />
+        </div>
+      </section>
+
+      <section class="cards">
+        @for (s of stats; track s.label) {
+          <div class="card">
+            <p class="card-label">[{{ s.label }}]</p>
+            <p class="card-num">{{ s.value }}</p>
+            <p class="card-sub">{{ s.sub }}</p>
+          </div>
+        }
+      </section>
+
+      <section class="panels">
+        <div class="panel">
+          <h2 class="panel-title">Sales this week</h2>
+          <div class="chart">
+            @for (bar of salesBars; track bar.day) {
+              <div class="bar-col">
+                <div class="bar-track">
+                  <div class="bar" [style.height.%]="bar.pct"></div>
+                </div>
+                <span class="bar-day">{{ bar.day }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2 class="panel-title">Recent activity</h2>
+          <ul class="feed">
+            @for (e of activity; track $index) {
+              <li class="event">
+                <span class="marker marker--{{ e.tone }}"></span>
+                <span class="event-text">{{ e.text }}</span>
+                <span class="event-time">{{ e.time }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </section>
+    }
+
+    @case ('products') {
+      <ag-grid-angular
+        class="grid"
+        [theme]="gridTheme"
+        [rowData]="rowData"
+        [columnDefs]="colDefs"
+        [defaultColDef]="defaultColDef"
+        [rowHeight]="130"
+        [pagination]="true"
+        (cellValueChanged)="onCellEdit($event)"
+      />
+    }
+
+    @case ('users') {
+      <section class="users">
+        <h2 class="users-title">
+          <span class="slash">//</span> pending applications
+          <span class="count">[{{ pendingUsers().length }}]</span>
+        </h2>
+
+        @if (pendingUsers().length) {
+          <div class="applicants">
+            @for (u of pendingUsers(); track u.id) {
+              <div class="applicant">
+                <div class="applicant-info">
+                  <p class="applicant-name">{{ u.name }}</p>
+                  <p class="applicant-meta">{{ u.email }} · registered {{ u.registered }}</p>
+                  <div class="applicant-images">
+                    <div class="img-box"></div>
+                    <div class="img-box"></div>
+                    <div class="img-box"></div>
+                  </div>
+                </div>
+                <span class="applicant-status">pending</span>
+                <div class="applicant-actions">
+                  <button type="button" class="act accept" (click)="accept(u.id)">accept</button>
+                  <button type="button" class="act reject" (click)="reject(u.id)">reject</button>
+                </div>
+              </div>
+            }
+          </div>
+        } @else {
+          <p class="empty-users">no pending applications</p>
+        }
+      </section>
+    }
+  }
+</main>
+
+<footer class="statusbar">
+    <span class="mode">[SUDO]</span>
+    <span class="path">~/sukuna/admin</span>
+    <span class="spacer"></span>
+    <button type="button" class="logout-box" (click)="logout()">[logout]</button>
+</footer>

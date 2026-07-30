@@ -75,9 +75,14 @@ export class AuthService {
         return !!this.getToken();
     }
 
-    logout(): void {
+    // clear the token + user without navigating (used when denying admin access)
+    clearSession(): void {
         this.cookieService.delete(this.tokenkey, '/');
         this.currentUser = undefined;
+    }
+
+    logout(): void {
+        this.clearSession();
         this.router.navigate(['/']);
     }
 }

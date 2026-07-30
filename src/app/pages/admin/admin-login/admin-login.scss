@@ -1,0 +1,113 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  max-width: 100vw;
+  text-align: center;
+}
+
+:host * {
+    margin: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-terminal);
+  font-size: var(--text-md);
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+h1 {
+  font-family: var(--font-main);
+  font-weight: 500;
+  font-size: var(--text-xl);
+  line-height: 1.25;
+}
+
+.typed {
+  border-right: 10px solid var(--color-red);
+}
+
+.typed.blink {
+  animation: blink 0.75s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.subtitle
+{
+  font-family: var(--font-jp);
+  font-size: var(--text-md);
+  color: var(--color-gold);
+  letter-spacing: 0.3em;
+  margin-bottom: 5rem;
+  font-weight: bold;
+}
+
+form {
+  width: 80%;
+  text-align: left;
+}
+
+
+.credentials{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+input {
+  font-family: var(--font-sub);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-muted);
+  padding: 8px 0;
+}
+
+input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.5;
+}
+
+// base styling comes from the global .btn class
+button[type="submit"] {
+  width: 100%;
+  margin-top: 4rem;
+}
+
+button[type="submit"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-error {
+  font-family: var(--font-terminal);
+  font-size: var(--text-sm);
+  font-weight: bold;
+  color: var(--color-red);
+  letter-spacing: 0.05em;
+  margin-top: 2rem;
+}
+
+.form-error::before {
+  content: "[!] ";
+}

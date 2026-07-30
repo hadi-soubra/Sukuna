@@ -65,7 +65,7 @@
   color: var(--color-gold); // the [ ] brackets stay gold at all times
 }
 
-// the label text inside the brackets — muted, lights up on hover
+// the label text inside the brackets muted, lights up on hover
 .tok .label {
   color: var(--color-muted);
   transition: color 0.15s ease;

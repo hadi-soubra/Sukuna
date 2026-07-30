@@ -1,1 +1,33 @@
-<p>admin-login works!</p>
+<p class="eyebrow">
+    <span style="color: var(--color-red);">$ </span>
+    <span style="color: var(--color-gold);">./sukuna --status </span>
+    <span style="color: var(--color-muted);">// admin</span>
+</p>
+
+<h1><span class="typed" [class.blink]="typingDone()">{{ headline() }}</span></h1>
+
+<p class="subtitle">お帰りなさい、ハディ。</p>
+
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()" (input)="clearError()">
+    <section class="credentials">
+
+        <label>
+        Email
+        <input type="email" formControlName="email" placeholder="you@domain.com" />
+        </label>
+
+        <label>
+        Password
+        <input type="password" formControlName="password" placeholder="##################" />
+        </label>
+
+    </section>
+
+    @if (errorMessage()) {
+      <p class="form-error">{{ errorMessage() }}</p>
+    }
+
+    <button type="submit" class="btn" [disabled]="loginForm.invalid || loading()">
+      {{ loading() ? '[LOGGING IN...]' : '[LOG IN]' }}
+    </button>
+</form>
