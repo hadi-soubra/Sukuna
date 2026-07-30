@@ -1,0 +1,48 @@
+<app-header />
+
+<main class="account">
+  @if (user(); as u) {
+    <header class="profile">
+      <div class="avatar">{{ u.firstName[0] }}{{ u.lastName[0] }}</div>
+      <div class="profile-info">
+        <h1 class="profile-name">{{ u.firstName }} {{ u.lastName }}</h1>
+        <p class="profile-handle">{{ u.username}}</p>
+      </div>
+      <button type="button" class="btn" (click)="logout()">[log out]</button>
+    </header>
+
+    <section class="panel">
+      <h2 class="panel-title"><span class="slash">//</span> edit profile</h2>
+      <form class="edit-form" (submit)="$event.preventDefault()">
+        <label>First name <input type="text" [value]="u.firstName" /></label>
+        <label>Last name <input type="text" [value]="u.lastName" /></label>
+        <label>Email <input type="email" [value]="u.email" /></label>
+        <label>Date of birth <input type="date" [value]="u.dateOfBirth" /></label>
+        <button type="submit" class="btn">[save changes]</button>
+      </form>
+    </section>
+  } @else {
+    <p class="loading">loading profile…</p>
+  }
+
+  <section class="panel">
+    <h2 class="panel-title"><span class="slash">//</span> payment methods</h2>
+    <div class="cards">
+      @for (pm of paymentMethods; track pm.last4) {
+        <div class="pay-card">
+          <span class="pay-brand">{{ pm.brand }}</span>
+          <span class="pay-num">•••• {{ pm.last4 }}</span>
+          <span class="pay-exp">exp {{ pm.expiry }}</span>
+          <span class="pay-cvv">cvv&nbsp;***</span>
+          <button type="button" class="pay-remove">remove</button>
+        </div>
+      }
+    </div>
+    <button type="button" class="add-pay">[+ add payment method]</button>
+  </section>
+
+</main>
+
+<app-menu-sidebar />
+<app-cart-drawer />
+<app-status-bar mode="[NORMAL]" />
