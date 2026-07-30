@@ -104,11 +104,10 @@ Simulated : no real payment. A multi-step flow:
 
 Your "account page" : the rubric breaks it into three parts, so tabs/sections:
 
-- [ ] **User details** : read view of the logged-in user
-- [ ] **Edit profile details** : editable form
-- [ ] **Payment methods** : list + add + remove (signal + localStorage; no real backend) : *required by rubric*
-- [ ] **Logout**
-- [ ] (Optional, nice) order history from simulated checkouts
+- [x] **User details** : read view of the logged-in user
+- [x] **Edit profile details** : editable form
+- [x] **Payment methods** : list + add + remove (signal + localStorage; no real backend) : *required by rubric*
+- [x] **Logout**
 
 
 
