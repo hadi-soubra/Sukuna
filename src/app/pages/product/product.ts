@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Header } from '../../core/layout/header/header';
 import { StatusBar } from '../../core/layout/status-bar/status-bar';
@@ -10,17 +10,11 @@ import { MenuSidebar } from '../../core/layout/menu-sidebar/menu-sidebar';
 import { ProductService } from '../../shared/services/product.service';
 import { CartStore } from '../../shared/services/cart.store';
 import { IProduct } from '../../shared/interfaces/IProduct';
+import { ProductCard } from '../../shared/components/product-card/product-card';
 
 @Component({
   selector: 'app-product',
-  imports: [
-    Header,
-    StatusBar,
-    CartDrawer,
-    MenuSidebar,
-    CurrencyPipe,
-    UpperCasePipe,
-  ],
+  imports: [Header, StatusBar, CartDrawer, MenuSidebar, CurrencyPipe, UpperCasePipe, ProductCard],
   templateUrl: './product.html',
   styleUrl: './product.scss',
 })
@@ -31,6 +25,7 @@ export class Product {
   private readonly destroyRef = inject(DestroyRef);
 
   protected readonly product = signal<IProduct | null>(null);
+  protected readonly similarProducts = signal<IProduct[]>([]);
   protected readonly quantity = signal(1);
   protected readonly loading = signal(true);
 
@@ -44,12 +39,25 @@ export class Product {
         switchMap((params) => {
           this.loading.set(true);
           this.quantity.set(1);
+          this.similarProducts.set([]);
           return this.productService.getById(Number(params.get('id')));
         }),
-        takeUntilDestroyed(this.destroyRef)
+        switchMap((product) =>
+          this.productService.getByCategory(product.category).pipe(
+            map((categoryProducts) => {
+              const similarProducts = categoryProducts
+                .filter((item) => item.id !== product.id)
+                .slice(0, 4);
+
+              return { product, similarProducts };
+            }),
+          ),
+        ),
+        takeUntilDestroyed(this.destroyRef),
       )
-      .subscribe((product) => {
+      .subscribe(({ product, similarProducts }) => {
         this.product.set(product);
+        this.similarProducts.set(similarProducts);
         this.loading.set(false);
       });
   }

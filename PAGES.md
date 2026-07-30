@@ -68,12 +68,11 @@ One page, param-driven (a category or "all"). This is where filter/sort/search l
 
 
 ## 4. Product detail `/product/:id`  `[x]`  ← the product mockup
-> **Similar items** (rubric-required) was built then removed at your request — re-add before submission.
-
 - [x] Large image, category tag, title, price, rating + review count, description
 - [x] Quantity stepper + ADD TO CART (adds N to CartStore, opens mini-cart)
 - [x] Trust line (free shipping / returns)
 - [x] Reachable by clicking any product card anywhere (`/product/:id`)
+- [x] **Similar items** : four reusable product cards from the current product's category
 
 
 ## 5. Full cart page `/cart`  `[x]`
@@ -123,7 +122,7 @@ Your "account page" : the rubric breaks it into three parts, so tabs/sections:
 
 ## 9. Utility  `[ ]`
 
-- [ ] **404 / not-found** page
+- [x] **404 / not-found** page
 - [ ] Consistent loading + error UI across data fetches
 
 
@@ -135,11 +134,10 @@ Your "account page" : the rubric breaks it into three parts, so tabs/sections:
 | `/` | Gate (teaser/register/login/ended) | public |
 | `/shop` | Storefront home | authed |
 | `/shop/:category` | Listing (filter/sort/search) | authed |
-| `/product/:id` | Product detail (similar removed) | authed |
+| `/product/:id` | Product detail + similar items | authed |
 | `/cart` | Full cart | authed |
 | `/checkout` | Checkout flow → confirmation | authed |
 | `/account` | Profile / payment methods | authed |
 | `/admin-login` | Admin login | public |
 | `/admin` | Admin dashboard | admin |
 | `**` | 404 | public |
-

@@ -1,12 +1,16 @@
 <app-header />
 
 <main class="product">
-
   @if (loading()) {
     <p class="status">loading…</p>
   } @else if (product(); as p) {
     <div class="detail">
-      <div class="media" [style.transform]="tilt()" (mousemove)="onTilt($event)" (mouseleave)="resetTilt()">
+      <div
+        class="media"
+        [style.transform]="tilt()"
+        (mousemove)="onTilt($event)"
+        (mouseleave)="resetTilt()"
+      >
         <img [src]="p.image" [alt]="p.title" />
       </div>
 
@@ -29,9 +33,20 @@
           </div>
           <button type="button" class="btn add" (click)="addToCart()">[ADD TO CART]</button>
         </div>
-
       </div>
     </div>
+
+    <section class="similar" aria-labelledby="similar-title">
+      <div class="similar-heading">
+        <h2 id="similar-title"><span class="slash">//</span> Similar Items</h2>
+      </div>
+
+      <div class="similar-grid">
+        @for (item of similarProducts(); track item.id) {
+          <app-product-card [product]="item" />
+        }
+      </div>
+    </section>
   } @else {
     <p class="status">product not found</p>
   }

@@ -49,4 +49,8 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/admin/admin-page/admin-page').then((module) => module.AdminPage),
   },
+  {
+    path: '**',
+    loadComponent: () => import('./pages/not-found/not-found').then((module) => module.NotFound),
+  },
 ];
