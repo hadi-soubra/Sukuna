@@ -10,7 +10,7 @@ import { ProductCard } from '../../shared/components/product-card/product-card';
 import { ProductService } from '../../shared/services/product.service';
 import { IProduct } from '../../shared/interfaces/IProduct';
 
-type SortKey = 'name' | 'price-asc' | 'price-desc' | 'rating' ;
+type SortKey = 'name' | 'price-asc' | 'price-desc' | 'rating';
 
 // API category string (or 'all') -> short display label
 const CATEGORY_LABELS: Record<string, string> = {
@@ -49,7 +49,7 @@ export class Listing {
   ] as const;
 
   protected readonly categoryLabel = computed(
-    () => CATEGORY_LABELS[this.category()] ?? this.category()
+    () => CATEGORY_LABELS[this.category()] ?? this.category(),
   );
 
   // slider ceiling = highest price in the loaded set
@@ -63,15 +63,17 @@ export class Listing {
     const q = this.searchQuery().trim().toLowerCase();
     const max = this.maxPrice();
     const list = this.products().filter(
-      (p) => p.price <= max && (!q || p.title.toLowerCase().includes(q))
+      (p) => p.price <= max && (!q || p.title.toLowerCase().includes(q)),
     );
     return this.sortList(list, this.sortBy());
   });
 
   constructor() {
-    // a global search can arrive as ?search=... from the sidebar
-    const initialSearch = this.route.snapshot.queryParamMap.get('search');
-    if (initialSearch) this.searchQuery.set(initialSearch);
+    // Keep sidebar searches in sync even when Angular reuses this page and
+    // only the ?search= query parameter changes.
+    this.route.queryParamMap
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((params) => this.searchQuery.set(params.get('search') ?? ''));
 
     // refetch whenever the :category changes
     this.route.paramMap
@@ -84,14 +86,12 @@ export class Listing {
             ? this.productService.getAll()
             : this.productService.getByCategory(cat);
         }),
-        takeUntilDestroyed(this.destroyRef)
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((products) => {
         this.products.set(products);
         // reset the price filter to include the whole (new) range
-        const ceiling = products.length
-          ? Math.ceil(Math.max(...products.map((p) => p.price)))
-          : 0;
+        const ceiling = products.length ? Math.ceil(Math.max(...products.map((p) => p.price))) : 0;
         this.maxPrice.set(ceiling);
         this.loading.set(false);
       });
