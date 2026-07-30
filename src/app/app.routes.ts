@@ -1,12 +1,4 @@
 import { Routes } from '@angular/router';
-import { Login } from './pages/login/login';
-import { Shop } from './pages/shop/shop';
-import { Product } from './pages/product/product';
-import { Listing } from './pages/listing/listing';
-import { Cart } from './pages/cart/cart';
-import { Account } from './pages/account/account';
-import { AdminLogin } from './pages/admin/admin-login/admin-login';
-import { Checkout } from './pages/checkout/checkout';
 import { checkoutAccessGuard } from './core/auth/checkout-access.guard';
 import { authGuard } from './core/auth/auth.guard';
 import { adminGuard } from './core/auth/admin.guard';
@@ -14,41 +6,42 @@ import { adminGuard } from './core/auth/admin.guard';
 export const routes: Routes = [
   {
     path: '',
-    component: Login,
+    loadComponent: () => import('./pages/login/login').then((module) => module.Login),
   },
   {
     path: 'shop',
-    component: Shop,
+    loadComponent: () => import('./pages/shop/shop').then((module) => module.Shop),
     canActivate: [authGuard],
   },
   {
     path: 'product/:id',
-    component: Product,
+    loadComponent: () => import('./pages/product/product').then((module) => module.Product),
     canActivate: [authGuard],
   },
   {
     path: 'shop/:category',
-    component: Listing,
+    loadComponent: () => import('./pages/listing/listing').then((module) => module.Listing),
     canActivate: [authGuard],
   },
   {
     path: 'cart',
-    component: Cart,
+    loadComponent: () => import('./pages/cart/cart').then((module) => module.Cart),
     canActivate: [authGuard],
   },
   {
     path: 'checkout',
-    component: Checkout,
+    loadComponent: () => import('./pages/checkout/checkout').then((module) => module.Checkout),
     canActivate: [checkoutAccessGuard],
   },
   {
     path: 'account',
-    component: Account,
+    loadComponent: () => import('./pages/account/account').then((module) => module.Account),
     canActivate: [authGuard],
   },
   {
     path: 'admin-login',
-    component: AdminLogin,
+    loadComponent: () =>
+      import('./pages/admin/admin-login/admin-login').then((module) => module.AdminLogin),
   },
 
   {
