@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:cart": "ng test --watch=false --include src/app/pages/cart/cart.spec.ts"
   },
   "private": true,
   "packageManager": "npm@11.18.0",
@@ -29,6 +30,7 @@
     "@angular/cli": "^22.0.4",
     "@angular/compiler-cli": "^22.0.0",
     "@testing-library/angular": "^19.4.1",
+    "@testing-library/user-event": "^14.6.1",
     "jsdom": "^28.0.0",
     "prettier": "^3.9.6",
     "typescript": "~6.0.2",
