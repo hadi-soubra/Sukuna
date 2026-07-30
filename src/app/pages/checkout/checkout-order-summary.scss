@@ -47,14 +47,17 @@
   position: relative;
   width: 54px;
   height: 54px;
-  background: #ece8e1;
+  background:
+    url('/prod_card_back.png') center / cover no-repeat,
+    var(--color-bg);
 }
 
 .summary-thumb img {
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
+  padding: 6px;
   object-fit: contain;
-  mix-blend-mode: multiply;
 }
 
 .summary-thumb span {

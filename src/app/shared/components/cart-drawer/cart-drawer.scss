@@ -82,8 +82,12 @@
   flex-shrink: 0;
   width: 56px;
   height: 56px;
+  box-sizing: border-box;
+  padding: 7px;
   object-fit: contain;
-  background: #fff;
+  background:
+    url('/prod_card_back.png') center / cover no-repeat,
+    var(--color-bg);
 }
 .info {
   flex: 1;

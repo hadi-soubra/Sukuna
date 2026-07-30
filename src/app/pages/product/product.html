@@ -31,7 +31,7 @@
             <span class="n">{{ quantity() }}</span>
             <button type="button" aria-label="increase" (click)="inc()">+</button>
           </div>
-          <button type="button" class="btn add" (click)="addToCart()">[ADD TO CART]</button>
+          <button type="button" class="btn add" (click)="addToCart($event)">[ADD TO CART]</button>
         </div>
       </div>
     </div>
@@ -51,6 +51,22 @@
     <p class="status">product not found</p>
   }
 </main>
+
+@for (flight of cartFlights(); track flight.id) {
+  <img
+    class="cart-flight"
+    [src]="flight.image"
+    alt=""
+    aria-hidden="true"
+    [style.left.px]="flight.startX"
+    [style.top.px]="flight.startY"
+    [style.--hop-x]="flight.hopX + 'px'"
+    [style.--hop-y]="flight.hopY + 'px'"
+    [style.--end-x]="flight.endX + 'px'"
+    [style.--end-y]="flight.endY + 'px'"
+    (animationend)="finishCartFlight(flight.id)"
+  />
+}
 
 <app-menu-sidebar />
 <app-cart-drawer />
