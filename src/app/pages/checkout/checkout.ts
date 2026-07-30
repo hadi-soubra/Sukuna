@@ -23,6 +23,20 @@ export class Checkout {
   protected readonly cart = inject(CartStore);
   protected readonly confirmation = signal<Confirmation | null>(null);
 
+  protected readonly fieldExamples = {
+    email: 'Email address',
+    country: 'Country / region',
+    fullName: 'Full name',
+    address: 'Address',
+    apartment: 'Apartment, suite, etc. (optional)',
+    city: 'City',
+    postalCode: 'Postal code',
+    cardNumber: 'Card number',
+    expiry: 'Expiration date (MM/YY)',
+    cvv: 'Security code',
+    cardholder: 'Name on card',
+  } as const;
+
   protected readonly checkoutForm = this.formBuilder.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     country: ['', Validators.required],

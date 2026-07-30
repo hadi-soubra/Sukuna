@@ -1,25 +1,27 @@
 <app-header />
 
 <main class="shop">
-
-    <section class="hero">
+  <section class="hero">
     <p class="eyebrow">
-        <span style="color: var(--color-red);">$ </span>
-        <span style="color: var(--color-gold);">./sukuna --season 2026 </span>
-        <span style="color: var(--color-muted);">// modern staples</span>
+      <span style="color: var(--color-red)">$ </span>
+      <span style="color: var(--color-gold)">./sukuna --season 2026 </span>
+      <span style="color: var(--color-muted)">// modern staples</span>
     </p>
 
-    <h1><span class="typed" [class.blink]="typingDone()">{{ headline() }}</span></h1>
+    <h1>
+      <span class="typed" [class.blink]="typingDone()">{{ headline() }}</span>
+    </h1>
 
     <p class="subtitle">静かに生み出される、美しいものたち</p>
-
-    </section>
+  </section>
 
   @if (newDrops().length) {
     <section class="drops">
       <div class="drops-head">
         <h2 class="drops-title"><span class="slash">//</span> New Drops</h2>
-        <a class="view-all" [routerLink]="['/shop', 'all']">[view all]</a>
+        <a class="view-all" [routerLink]="['/shop', 'all']"
+          >[<span class="label">view all</span>]</a
+        >
       </div>
 
       <div class="grid">
@@ -33,8 +35,12 @@
   @for (section of sections(); track section.category) {
     <section class="drops">
       <div class="drops-head">
-        <h2 class="drops-title"><span class="slash">//</span> {{ section.category | uppercase }}</h2>
-        <a class="view-all" [routerLink]="['/shop', section.category]">[view all]</a>
+        <h2 class="drops-title">
+          <span class="slash">//</span> {{ section.category | uppercase }}
+        </h2>
+        <a class="view-all" [routerLink]="['/shop', section.category]"
+          >[<span class="label">view all</span>]</a
+        >
       </div>
 
       <div class="grid">

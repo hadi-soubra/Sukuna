@@ -10,10 +10,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 64px;
+  height: var(--header-height);
   padding: 0 24px;
   background: var(--color-bg);
-  border-bottom: 1px solid rgba(194, 156, 37, 0.55);
+  border-bottom: 1px solid var(--color-gold);
 }
 
 .brand {
@@ -47,7 +47,7 @@
   box-sizing: border-box;
   display: grid;
   place-items: center;
-  min-height: calc(100dvh - 90px);
+  min-height: calc(100dvh - var(--header-height) - var(--footer-height));
 }
 
 .checkout-page button {
@@ -82,9 +82,15 @@
 .checkout-form > h1 {
   margin: 0 0 40px;
   color: var(--color-text);
-  font-family: var(--font-main);
-  font-size: clamp(30px, 4vw, 42px);
-  font-weight: 500;
+  font-family: var(--font-terminal);
+  font-size: var(--text-lg);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.checkout-form > h1 .slash {
+  color: var(--color-gold);
 }
 
 .form-section {
@@ -133,33 +139,25 @@
   grid-column: 1 / -1;
 }
 
-.field > span {
-  position: absolute;
-  top: 7px;
-  left: 14px;
-  z-index: 1;
-  color: var(--color-muted);
-  font-size: 9px;
-  letter-spacing: 0.03em;
-  pointer-events: none;
-}
-
 .field input {
   box-sizing: border-box;
   width: 100%;
   height: 54px;
-  padding: 21px 14px 7px;
-  background: rgba(236, 232, 225, 0.025);
-  border: 1px solid rgba(100, 100, 99, 0.8);
+  padding: 0 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-muted);
   border-radius: 0;
   color: var(--color-text);
-  font-family: var(--font-sub);
+  font-family: var(--font-terminal);
   font-size: var(--text-sm);
+  text-align: left;
   outline: none;
 }
 
 .field input::placeholder {
-  color: transparent;
+  color: var(--color-muted);
+  font-family: var(--font-terminal);
+  opacity: 1;
 }
 
 .field input:hover {
@@ -176,15 +174,16 @@
 }
 
 .field small {
-  margin: 5px 2px 0;
+  margin: 7px 2px 0;
   color: var(--color-red);
-  font-size: 9px;
+  font-size: var(--text-sm);
+  line-height: 1.4;
 }
 
 .card-fields {
   padding: 12px;
-  background: rgba(236, 232, 225, 0.025);
-  border: 1px solid rgba(100, 100, 99, 0.45);
+  background: var(--color-bg);
+  border: 1px solid var(--color-muted);
 }
 
 .place-order {
@@ -203,10 +202,10 @@
 
 app-checkout-order-summary {
   position: sticky;
-  top: 30px;
+  top: calc(var(--header-height) + 24px);
   padding: 24px;
-  background: rgba(236, 232, 225, 0.035);
-  border: 1px solid rgba(100, 100, 99, 0.35);
+  background: var(--color-bg);
+  border: 1px solid var(--color-muted);
 }
 
 .confirmation {
@@ -215,7 +214,7 @@ app-checkout-order-summary {
   max-width: 680px;
   margin: 0 auto;
   padding: clamp(28px, 6vw, 58px);
-  border: 1px solid rgba(194, 156, 37, 0.65);
+  border: 1px solid var(--color-gold);
   text-align: center;
 }
 
@@ -263,8 +262,8 @@ app-checkout-order-summary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 30px;
-  border-top: 1px solid rgba(100, 100, 99, 0.45);
-  border-bottom: 1px solid rgba(100, 100, 99, 0.45);
+  border-top: 1px solid var(--color-muted);
+  border-bottom: 1px solid var(--color-muted);
 }
 
 .receipt div {
@@ -272,7 +271,7 @@ app-checkout-order-summary {
 }
 
 .receipt div + div {
-  border-left: 1px solid rgba(100, 100, 99, 0.45);
+  border-left: 1px solid var(--color-muted);
 }
 
 .receipt span,
@@ -338,7 +337,7 @@ app-checkout-order-summary {
   }
 
   .receipt div + div {
-    border-top: 1px solid rgba(100, 100, 99, 0.45);
+    border-top: 1px solid var(--color-muted);
     border-left: 0;
   }
 }

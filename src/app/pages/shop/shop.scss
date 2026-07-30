@@ -36,7 +36,6 @@ h1 {
   }
 }
 
-
 .eyebrow {
   font-family: var(--font-terminal);
   font-size: var(--text-md);
@@ -62,7 +61,6 @@ h1 {
   text-transform: uppercase;
 }
 
-
 /* ---- category sections ---- */
 .drops {
   margin-top: 48px;
@@ -82,6 +80,7 @@ h1 {
   font-size: var(--text-md);
   font-weight: bold;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
   color: var(--color-text);
 }
 .drops-title .slash {
@@ -96,10 +95,15 @@ h1 {
   font-size: var(--text-sm);
   font-weight: bold;
   letter-spacing: 0.05em;
+  color: var(--color-gold);
+}
+
+.view-all .label {
   color: var(--color-muted);
   transition: color 0.15s ease;
 }
-.view-all:hover {
+
+.view-all:hover .label {
   color: var(--color-gold);
 }
 

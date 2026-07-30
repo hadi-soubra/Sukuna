@@ -35,7 +35,9 @@
     <!-- account: only shown here on mobile; lives in the header on desktop -->
     <div class="account">
       <p class="label">// account</p>
-      <a class="acc-link" routerLink="/account" (click)="ui.closeMenu()">[<span class="lbl">account</span>]</a>
+      <a class="cat" routerLink="/account" (click)="ui.closeMenu()">
+        <span class="name">[<span class="lbl">Account</span>]</span>
+      </a>
     </div>
   </aside>
 }
